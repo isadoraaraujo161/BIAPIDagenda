@@ -374,3 +374,44 @@ body {
 .privacy-icone {
     font-size: 17px;
 }
+
+
+/* Notebooks pequenos / tablets na horizontal */
+@media (max-width: 1024px) {
+    .barradenavegacao {
+        padding: 0 30px;
+    }
+
+    .principal,
+    .caracteristicas,
+    .rodape {
+        width: calc(100% - 60px);
+    }
+
+    .principal {
+        margin-top: 50px;
+    }
+
+    .principal h1 {
+        letter-spacing: -3px;
+    }
+
+    .caracteristicas {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .decoracao-topo {
+        width: 360px;
+        height: 360px;
+        top: -140px;
+        right: -80px;
+    }
+}
+
+/* Tablets */
+@media (max-width: 768px) {
+    .barradenavegacao {
+        height: 64px;
+        padding: 0 20px;
+    }
+}

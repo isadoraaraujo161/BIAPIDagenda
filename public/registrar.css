@@ -126,3 +126,79 @@ button:hover {
     text-decoration: underline;
 }
 
+/* Tablets e telas menores */
+@media (max-width: 768px) {
+    .cartao-cadastro {
+        max-width: 380px;
+        padding: 32px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+    .container-cadastro {
+        align-items: flex-start;
+        padding: 32px 16px 16px;
+    }
+
+    .cartao-cadastro {
+        max-width: 100%;
+        padding: 24px 20px;
+        border-radius: 14px;
+        box-shadow: 0 6px 24px rgba(30, 25, 70, 0.07);
+    }
+
+    .logo {
+        margin-bottom: 24px;
+        font-size: 26px;
+    }
+
+    h1 {
+        font-size: 22px;
+    }
+
+    .subtitulo {
+        margin-bottom: 22px;
+        font-size: 13px;
+    }
+
+    .grupo-entrada {
+        margin-bottom: 14px;
+    }
+
+    .grupo-entrada input {
+        font-size: 16px; /* evita o zoom automático do iOS ao focar no campo */
+    }
+
+    .link-login {
+        margin-top: 20px;
+        padding-top: 18px;
+    }
+}
+
+/* Celulares muito pequenos */
+@media (max-width: 360px) {
+    .cartao-cadastro {
+        padding: 20px 16px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
