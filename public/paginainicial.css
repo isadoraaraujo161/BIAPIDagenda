@@ -1084,10 +1084,6 @@ a {
 
 @media (max-width: 760px) {
 
-    .barra-lateral {
-        display: none;
-    }
-
     .barra-superior {
         padding: 0 12px;
     }
@@ -1102,5 +1098,112 @@ a {
 
     .categoria-tarefa {
         display: none;
+    }
+}
+/* Fundo escuro do menu (escondido no desktop) */
+.fundo-menu {
+    display: none;
+}
+
+@media (max-width: 760px) {
+
+    .barra-lateral {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 270px;
+        max-width: 85%;
+        height: 100vh;
+        height: 100dvh;
+        transform: translateX(-100%);
+        visibility: hidden;
+        transition: transform .3s ease, visibility .3s;
+        box-shadow: none;
+    }
+
+    .barra-lateral.aberto {
+        transform: translateX(0);
+        visibility: visible;
+        box-shadow: 8px 0 30px rgba(0, 0, 0, .25);
+    }
+
+    .fundo-menu {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        background: rgba(10, 15, 30, .55);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .3s ease;
+    }
+
+    .fundo-menu.ativo {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    body.menu-aberto {
+        overflow: hidden;
+    }
+
+    .barra-superior {
+        padding: 0 12px;
+    }
+
+    .conteudo {
+        padding: 12px 12px 24px;
+    }
+
+    .cartoes-resumo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .banner-boas-vindas {
+        padding: 18px 20px;
+    }
+
+    .banner-boas-vindas h1 {
+        font-size: 24px;
+    }
+
+    .categoria-tarefa {
+        display: none;
+    }
+
+    /* Agenda: controles ocupam a linha toda */
+    .controles-agenda {
+        width: 100%;
+        margin-left: 0;
+        justify-content: space-between;
+    }
+
+    .botao-nova-tarefa {
+        padding: 9px 14px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    /* Esconde o texto do botão e deixa só o ícone e a seta, para a barra não estourar */
+    .botao-perfil .nome-usuario {
+        display: none;
+    }
+
+    .botao-perfil {
+        padding: 0 14px;
+    }
+
+    .prioridade {
+        display: none;
+    }
+
+    .hora-tarefa {
+        width: 40px;
+    }
+
+    .lembrete-dia {
+        flex-wrap: wrap;
     }
 }

@@ -44,8 +44,7 @@
     <!-- Aplicativo -->
     <div class="aplicativo">
 
-        <aside class="barra-lateral">
-
+        <aside class="barra-lateral" id="barraLateral">
             <div class="area-logo">
                 <div class="simbolo-logo">B</div>
                 <div>
@@ -128,6 +127,8 @@
 
         </aside>
 
+        <div class="fundo-menu" id="fundoMenu"></div>
+
         <!-- Conteúdo principal -->
         <main class="conteudo-principal">
 
@@ -148,7 +149,8 @@
                     </button>
 
                     <!-- PERFIL SUPERIOR: DIRECIONA PARA perfil.html -->
-                    <a href="perfil.html" class="botao-perfil"
+                    <a href="perfil.html" class="botao-perfil" id="botaoMenu"
+                     aria-controls="barraLateral" aria-expanded="false"
                        style="text-decoration: none; color: inherit;">
 
                         <span>♙</span>
@@ -368,7 +370,8 @@
         </main>
 
     </div>
-
+    
+    <script src="menu-mobile.js"></script>
     <script src="usuario.js"></script>
      <script>
     mostrarUsuario();
