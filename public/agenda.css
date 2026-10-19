@@ -1,0 +1,2256 @@
+/* =====================================================
+   VARIÁVEIS DE TEMA (tudo que muda quando troca o tema)
+   — mesmo sistema usado no ajustes.css e no paginainicial.css —
+===================================================== */
+
+:root {
+    --cor-fundo: #f3f6fd;
+    --cor-superficie: #ffffff;
+    --cor-texto: #1b2a5e;
+    --cor-texto-forte: #0f1f5c;
+    --cor-suave: #5b6892;
+    --cor-borda: #e3e9f7;
+    --cor-acento: #1553f0;
+    --cor-acento-suave: #e9f0ff;
+    --cor-acento-texto: #ffffff;
+
+    /* Cores fixas de status (não mudam com o tema) */
+    --cor-vermelho: #e8455f;
+    --cor-laranja: #f5a524;
+    --cor-verde: #22a06b;
+    --cor-roxo: #5b3fd6;
+
+    --escala-fonte: 1;
+    --alvo-toque-min: 38px;
+}
+
+/* ---- Escuro ---- */
+[data-tema="escuro"] {
+    --cor-fundo: #121722;
+    --cor-superficie: #1b2230;
+    --cor-texto: #eef1f7;
+    --cor-texto-forte: #ffffff;
+    --cor-suave: #9aa7bd;
+    --cor-borda: #2a3344;
+    --cor-acento: #5a93ff;
+    --cor-acento-suave: #24344f;
+    --cor-acento-texto: #0d1420;
+}
+
+/* ---- Roxo ---- */
+[data-tema="roxo"] {
+    --cor-fundo: #f6f3fd;
+    --cor-superficie: #ffffff;
+    --cor-texto: #271c42;
+    --cor-texto-forte: #1c1335;
+    --cor-suave: #6f6288;
+    --cor-borda: #e7defa;
+    --cor-acento: #7c4de0;
+    --cor-acento-suave: #ece2fb;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Verde ---- */
+[data-tema="verde"] {
+    --cor-fundo: #f2faf5;
+    --cor-superficie: #ffffff;
+    --cor-texto: #15302a;
+    --cor-texto-forte: #0e241f;
+    --cor-suave: #577168;
+    --cor-borda: #dcf0e4;
+    --cor-acento: #1f9d63;
+    --cor-acento-suave: #dcf4e6;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Rosa ---- */
+[data-tema="rosa"] {
+    --cor-fundo: #fdf4f7;
+    --cor-superficie: #ffffff;
+    --cor-texto: #3a1f2a;
+    --cor-texto-forte: #2c1620;
+    --cor-suave: #8a6373;
+    --cor-borda: #f6dde5;
+    --cor-acento: #df4f80;
+    --cor-acento-suave: #fbe3ec;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Azul ---- */
+[data-tema="azul"] {
+    --cor-fundo: #eef4ff;
+    --cor-superficie: #ffffff;
+    --cor-texto: #122048;
+    --cor-texto-forte: #0b1733;
+    --cor-suave: #51628c;
+    --cor-borda: #d8e4fb;
+    --cor-acento: #2f6fef;
+    --cor-acento-suave: #dde9ff;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Alto contraste (combina com qualquer tema) ---- */
+[data-contraste="alto"] {
+    --cor-borda: currentColor;
+}
+
+[data-contraste="alto"] body {
+    --cor-texto: #000000;
+    --cor-texto-forte: #000000;
+    --cor-suave: #000000;
+}
+
+[data-tema="escuro"][data-contraste="alto"] body {
+    --cor-texto: #ffffff;
+    --cor-texto-forte: #ffffff;
+    --cor-suave: #ffffff;
+    --cor-fundo: #000000;
+    --cor-superficie: #0a0a0a;
+}
+
+[data-contraste="alto"] .cabecalho-pagina,
+[data-contraste="alto"] .cartao,
+[data-contraste="alto"] .cartao-lateral,
+[data-contraste="alto"] .caixa-modal {
+    border-width: 2px;
+}
+
+/* ---- Área de toque maior ---- */
+[data-area-toque="grande"] {
+    --alvo-toque-min: 52px;
+}
+
+[data-area-toque="grande"] .botao-perfil,
+[data-area-toque="grande"] .nova-tarefa,
+[data-area-toque="grande"] .botao-visualizacao,
+[data-area-toque="grande"] .seta-mes,
+[data-area-toque="grande"] .seta-dia,
+[data-area-toque="grande"] .seta-semana,
+[data-area-toque="grande"] .marcador,
+[data-area-toque="grande"] .radio-tarefa,
+[data-area-toque="grande"] .botao-salvar-modal,
+[data-area-toque="grande"] .botao-cancelar-modal {
+    min-height: var(--alvo-toque-min);
+}
+
+
+/* =====================================================
+   BASE
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: calc(16px * var(--escala-fonte));
+}
+
+body {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    transition: background .2s, color .2s;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ic {
+    width: 19.5px;
+    height: 19.5px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.aplicativo {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   MENU LATERAL
+===================================================== */
+
+.barra-lateral {
+    width: 234px;
+    background: var(--cor-superficie);
+    border-right: 1px solid var(--cor-borda);
+    padding: 13.5px 13.5px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: background .2s, border-color .2s;
+}
+
+.area-logo {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.simbolo-logo {
+    width: 52.5px;
+    height: 49.5px;
+    border-radius: 13.5px;
+    background: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    color: #ffffff;
+    font-size: 31.5px;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4.5px 10.5px rgba(21, 83, 240, .3);
+}
+
+.texto-logo {
+    font-size: 25.5px;
+    font-weight: 800;
+    color: var(--cor-acento);
+    line-height: 1;
+}
+
+.slogan-logo {
+    font-size: 11.2px;
+    color: var(--cor-suave);
+}
+
+.subtitulo-logo {
+    margin: 13.5px 0 10.5px;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-menu {
+    display: flex;
+    align-items: center;
+    gap: 13.5px;
+    padding: 0 13.5px;
+    height: 39.8px;
+    margin: 3px 0;
+    border-radius: 9px;
+    font-weight: 600;
+    font-size: 14.2px;
+    color: var(--cor-texto);
+    transition: background .15s;
+}
+
+.link-menu:hover {
+    background: var(--cor-acento-suave);
+}
+
+.icone-menu {
+    display: grid;
+    place-items: center;
+    color: var(--cor-acento);
+}
+
+.link-menu.ativo {
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 var(--cor-acento);
+}
+
+.parte-inferior {
+    margin-top: auto;
+    border-top: 1px solid var(--cor-borda);
+    padding-top: 10.5px;
+}
+
+.perfil-usuario {
+    margin-top: 10.5px;
+    background: var(--cor-acento-suave);
+    border-radius: 12px;
+    padding: 9px 10.5px;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.avatar-usuario {
+    width: 46.5px;
+    height: 46.5px;
+    border-radius: 50%;
+    background-image: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+    border: 3px solid #cfe0ff;
+    flex-shrink: 0;
+}
+
+.avatar-usuario.com-foto {
+    color: transparent;
+}
+.informacoes-usuario strong {
+    display: block;
+    color: var(--cor-acento);
+    font-size: 12.8px;
+}
+
+.informacoes-usuario span {
+    font-size: 11px;
+    color: var(--cor-suave);
+    display: flex;
+    align-items: center;
+    gap: 4.5px;
+}
+
+.ponto-online {
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background: var(--cor-verde);
+    display: inline-block;
+}
+
+.seta-perfil {
+    margin-left: auto;
+    color: var(--cor-acento);
+    font-size: 19.5px;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.conteudo-principal {
+    flex: 1;
+    min-width: 0;
+}
+
+.barra-superior {
+    height: 61.5px;
+    background: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 13.5px 0 21px;
+    transition: background .2s, border-color .2s;
+}
+
+.caminho-pagina {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-size: 14.2px;
+    font-weight: 600;
+    color: var(--cor-texto-forte);
+}
+
+.caminho-pagina .ic {
+    color: var(--cor-acento);
+}
+
+.caminho-pagina em {
+    font-style: normal;
+    color: var(--cor-suave);
+    font-weight: 400;
+}
+
+.acoes-superiores {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.notificacao {
+    width: 39.8px;
+    height: 39.8px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10.5px;
+    background: var(--cor-superficie);
+    color: var(--cor-suave);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, border-color .2s, color .2s;
+}
+
+.notificacao:hover {
+    background: var(--cor-fundo);
+    color: var(--cor-texto-forte);
+}
+
+.notificacao .ic {
+    width: 18px;
+    height: 18px;
+}
+
+.botao-perfil {
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto);
+    border-radius: 10.5px;
+    height: 39.8px;
+    padding: 0 16.5px;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-weight: 700;
+    font-size: 13.5px;
+    box-shadow: 0 4.5px 10.5px rgba(21, 83, 240, .25);
+}
+
+.botao-perfil .ic {
+    width: 16.5px;
+    height: 16.5px;
+}
+
+
+/* =====================================================
+   ÁREA PRINCIPAL (grade 2 colunas)
+===================================================== */
+
+.conteudo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 312px;
+    gap: 12px 18px;
+    padding: 9px 13.5px 18px 15px;
+    align-items: start;
+}
+
+.visualizacao-agenda {
+    display: none;
+}
+
+.cabecalho-pagina,
+.cartao,
+.cartao-lateral {
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 18px;
+    box-shadow: 0 3px 13.5px rgba(30, 60, 140, .08);
+    transition: background .2s, border-color .2s;
+}
+
+.cabecalho-pagina {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10.5px 12px;
+    align-self: stretch;
+}
+
+.icone-pagina {
+    width: 58.5px;
+    height: 51px;
+    border-radius: 15px;
+    background: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    display: grid;
+    place-items: center;
+    color: #ffffff;
+    flex-shrink: 0;
+}
+
+.icone-pagina .ic {
+    width: 28.5px;
+    height: 28.5px;
+}
+
+.texto-pagina h1 {
+    font-size: 25.5px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+    line-height: 1.1;
+}
+
+.texto-pagina p {
+    color: var(--cor-suave);
+    font-size: 12.8px;
+    font-weight: 500;
+}
+
+.acoes-pagina {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.nova-tarefa {
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-weight: 700;
+    font-size: 11.2px;
+    padding: 9.8px 12px;
+    border-radius: 9px;
+    white-space: nowrap;
+}
+
+.seletor-visualizacao {
+    display: flex;
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 4.5px;
+    gap: 2px;
+}
+
+.botao-visualizacao {
+    font-weight: 600;
+    font-size: 12.8px;
+    color: var(--cor-texto-forte);
+    height: 36px;
+    padding: 0 19.5px;
+    border-radius: 9px;
+    display: grid;
+    place-items: center;
+}
+
+/* Mesmo degradê do banner de boas-vindas da página inicial */
+.aviso-progresso {
+    background: linear-gradient(100deg, #1f52c9 0%, #2f6fe8 55%, #58a2fa 100%);
+    color: #ffffff;
+    border-radius: 16.5px;
+    padding: 13.5px 15px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    position: relative;
+    align-self: stretch;
+}
+
+.lampada {
+    width: 39px;
+    height: 45px;
+    border-radius: 10.5px;
+    background: rgba(255, 255, 255, .22);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 22.5px;
+}
+
+.aviso-progresso strong {
+    font-size: 15.8px;
+    font-weight: 800;
+    display: block;
+}
+
+.aviso-progresso p {
+    font-size: 12px;
+    line-height: 1.35;
+    opacity: .92;
+    padding-right: 22.5px;
+}
+
+.brilho {
+    position: absolute;
+    right: 13.5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+}
+
+
+/* =====================================================
+   CALENDÁRIO DO MÊS
+===================================================== */
+
+.cartao-mes {
+    padding: 16.5px 15px 13.5px;
+}
+
+.cabecalho-mes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.seta-mes {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 37.5px;
+    height: 30px;
+    border-radius: 9px;
+    border: 0;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-size: 19.5px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#mes-anterior { left: 0; }
+#mes-proximo { right: 0; }
+
+.titulo-mes {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    color: var(--cor-texto-forte);
+}
+
+.titulo-mes .ic {
+    width: 27px;
+    height: 27px;
+    color: var(--cor-acento);
+}
+
+.titulo-mes strong {
+    font-size: 26.2px;
+    font-weight: 800;
+}
+
+.dias-semana,
+#dias-calendario {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6.8px;
+}
+
+.dias-semana span {
+    text-align: center;
+    font-weight: 700;
+    font-size: 12.8px;
+    padding: 6px 0 3px;
+    color: var(--cor-texto-forte);
+}
+
+/* células de dia (geradas pelo agenda.js) */
+
+
+/* =====================================================
+   COLUNA LATERAL
+===================================================== */
+
+.coluna-lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cartao-lateral {
+    padding: 16.5px 16.5px 18px;
+}
+
+.titulo-lateral {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-size: 16.5px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+    margin-bottom: 10.5px;
+}
+
+.titulo-lateral .ic {
+    width: 28.5px;
+    height: 28.5px;
+    color: var(--cor-acento);
+}
+
+.cartao-lateral > p {
+    font-size: 12.8px;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+.botao-sugestao {
+    display: block;
+    margin-top: 10.5px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-weight: 700;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 10.5px;
+    padding: 12.8px;
+}
+
+.linha-prioridade {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8.2px 0;
+    font-size: 12.8px;
+    font-weight: 600;
+    border-top: 1px solid var(--cor-borda);
+}
+
+.titulo-lateral + .linha-prioridade {
+    border-top: 0;
+}
+
+.linha-prioridade strong {
+    margin-left: auto;
+}
+
+.ponto {
+    width: 16.5px;
+    height: 16.5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.fundo-vermelho { background: var(--cor-vermelho); }
+.fundo-laranja { background: var(--cor-laranja); }
+.fundo-verde { background: var(--cor-verde); }
+
+.vermelho { color: var(--cor-vermelho); }
+.laranja { color: #c77a06; }
+.texto-verde { color: var(--cor-verde); }
+
+
+/* =====================================================
+   VISÕES DIA E SEMANA
+===================================================== */
+
+#dia .grade-agenda {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+#semana .grade-agenda {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 312px;
+    gap: 18px;
+    align-items: start;
+}
+
+.cartao {
+    padding: 16.5px;
+}
+
+.cabecalho-cartao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10.5px;
+}
+
+.titulo-cartao {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+    margin-bottom: 10.5px;
+}
+
+.cabecalho-cartao .titulo-cartao {
+    margin-bottom: 0;
+}
+
+.cabecalho-cartao a {
+    color: var(--cor-acento);
+    font-weight: 700;
+}
+
+.seta,
+.demonstrativo {
+    margin-left: auto;
+    font-size: 11px;
+    color: var(--cor-acento);
+    background: var(--cor-acento-suave);
+    border: 0;
+    border-radius: 7.5px;
+    padding: 4.5px 9px;
+    font-weight: 700;
+}
+
+.sem-tarefas,
+.rotulo-pequeno,
+.mensagem-financeira,
+.informacoes-evento span {
+    color: var(--cor-suave);
+    font-size: 11.2px;
+    font-weight: 500;
+}
+
+.status-financeiro {
+    color: var(--cor-verde);
+    font-weight: 700;
+    display: block;
+    margin: 4.5px 0 10.5px;
+}
+
+.porcentagem,
+.cabecalho-meta {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.progresso,
+.progresso-meta {
+    height: 7.5px;
+    background: var(--cor-acento-suave);
+    border-radius: 74.2px;
+    overflow: hidden;
+    margin-bottom: 10.5px;
+}
+
+.progresso > div {
+    width: 58%;
+    height: 100%;
+    background: var(--cor-acento);
+    border-radius: 74.2px;
+}
+
+.progresso-meta .verde {
+    width: 60%;
+    height: 100%;
+    background: var(--cor-verde);
+}
+
+.progresso-meta .azul {
+    width: 75%;
+    height: 100%;
+    background: var(--cor-acento);
+}
+
+.evento {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 10.5px;
+}
+
+.data-evento {
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    border-radius: 12px;
+    padding: 7.5px 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.data-evento strong {
+    font-size: 19.5px;
+    line-height: 1;
+}
+
+.informacoes-evento p {
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+
+.link-agenda {
+    display: block;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-weight: 700;
+    text-align: center;
+    border-radius: 10.5px;
+    padding: 10.5px;
+}
+
+
+/* =====================================================
+   TROCA DE VISÃO (classes usadas pelo agenda.js)
+===================================================== */
+
+.visualizacao-agenda.ativa {
+    display: block;
+    grid-column: 1 / -1;
+}
+
+#mes.ativa,
+#mes.ativa .grade-agenda {
+    display: contents;
+}
+
+.botao-visualizacao:hover {
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+}
+
+.botao-visualizacao.ativo {
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto);
+    box-shadow: 0 4.5px 9px rgba(21, 83, 240, .3);
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* =====================================================
+   CÉLULAS DO MÊS
+===================================================== */
+
+#dias-calendario > div {
+    position: relative;
+    min-width: 0;
+    min-height: 70.5px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4.5px;
+    padding: 6px 7.5px;
+    border: 1.5px solid var(--cor-borda);
+    border-radius: 12px;
+    background: var(--cor-fundo);
+    box-shadow: 0 2px 4.5px rgba(30, 60, 140, .05);
+    transition: .2s;
+}
+
+.numero-dia {
+    font-size: 12.8px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+}
+
+#dias-calendario > div:hover {
+    border-color: color-mix(in srgb, var(--cor-acento) 40%, var(--cor-borda));
+    background: var(--cor-acento-suave);
+}
+
+#dias-calendario > div.vazio {
+    background: var(--cor-fundo);
+    box-shadow: none;
+    pointer-events: none;
+}
+
+#dias-calendario > div.hoje {
+    border: 2px solid var(--cor-acento);
+    background: var(--cor-acento-suave);
+}
+
+#dias-calendario > div.hoje .numero-dia {
+    width: 22.5px;
+    height: 22.5px;
+    border-radius: 50%;
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto);
+    display: grid;
+    place-items: center;
+    margin: -3px 0 0 -3px;
+}
+
+#dias-calendario > div.com-tarefas {
+    cursor: pointer;
+}
+
+.lista-mini-tarefas {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.mini-tarefa {
+    display: flex;
+    align-items: center;
+    gap: 4.5px;
+    min-width: 0;
+    padding: 3.8px 6px;
+    border-radius: 7.5px;
+    background: #d6f3e6;
+    color: #137a4f;
+}
+
+.mini-tarefa.importante { background: #fde8c7; color: #c77a06; }
+.mini-tarefa.urgente { background: #fbd4da; color: #d12a48; }
+
+.mini-tarefa i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    flex-shrink: 0;
+}
+
+.mini-tarefa span {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 11px;
+    font-weight: 700;
+    color: inherit;
+}
+
+.mini-tarefas-extra {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cor-suave);
+}
+
+
+/* =====================================================
+   TAREFAS DO DIA
+===================================================== */
+
+.tarefas {
+    display: flex;
+    flex-direction: column;
+}
+
+.tarefa {
+    min-height: 46.5px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7.5px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.tarefa:last-child {
+    border-bottom: 0;
+}
+
+.marcador {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #b5c0d8;
+    border-radius: 50%;
+    background: var(--cor-superficie);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.marcador:hover {
+    border-color: var(--cor-acento);
+}
+
+.tarefa-concluida .marcador {
+    background: var(--cor-acento);
+    border-color: var(--cor-acento);
+}
+
+.tarefa-concluida .informacoes-tarefa strong {
+    color: #8b98aa;
+    text-decoration: line-through;
+}
+
+.informacoes-tarefa {
+    min-width: 0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.informacoes-tarefa strong {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+}
+
+.informacoes-tarefa span {
+    font-size: 11px;
+    color: var(--cor-suave);
+}
+
+.prioridade {
+    padding: 3.8px 7.5px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.prioridade.importante { background: #fde8c7; color: #c77a06; }
+.prioridade.urgente { background: #fbd4da; color: #d12a48; }
+.prioridade.normal { background: #d6f3e6; color: #137a4f; }
+
+.sem-tarefas {
+    margin: 7.5px 0;
+    padding: 15px;
+    text-align: center;
+    background: var(--cor-fundo);
+    border: 1px dashed var(--cor-borda);
+    border-radius: 10.5px;
+}
+
+
+/* =====================================================
+   SEMANA
+===================================================== */
+
+.cartao-semana {
+    min-width: 0;
+}
+
+.calendario-semana {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 6.8px;
+}
+
+.dia-semana {
+    min-width: 0;
+    min-height: 195px;
+    padding: 10.5px;
+    border: 1.5px solid var(--cor-borda);
+    border-radius: 12px;
+    background: var(--cor-fundo);
+}
+
+.cabecalho-dia-semana {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.cabecalho-dia-semana span {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cor-suave);
+}
+
+.cabecalho-dia-semana strong {
+    font-size: 19.5px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+}
+
+.dia-semana.dia-atual {
+    border: 2px solid var(--cor-acento);
+    background: var(--cor-acento-suave);
+}
+
+.dia-semana.dia-atual span,
+.dia-semana.dia-atual strong {
+    color: var(--cor-acento);
+}
+
+.tarefas-dia {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 10.5px;
+}
+
+
+/* =====================================================
+   MODAIS (tarefas do dia / editar tarefa)
+===================================================== */
+
+.fundo-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 30, 55, .45);
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    z-index: 200;
+}
+
+.fundo-modal.aberto {
+    display: flex;
+}
+
+.caixa-modal {
+    width: 100%;
+    max-width: 345px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--cor-superficie);
+    border-radius: 16.5px;
+    overflow: hidden;
+    box-shadow: 0 15px 37.5px rgba(20, 40, 70, .18);
+}
+
+.cabecalho-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 13.5px 15px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.cabecalho-modal strong {
+    font-size: 13.5px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+}
+
+.fechar-modal {
+    width: 24px;
+    height: 24px;
+    border: 0;
+    border-radius: 7.5px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.corpo-modal {
+    padding: 10.5px 15px 15px;
+    overflow-y: auto;
+}
+
+.item-modal-tarefa {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7.5px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.item-modal-tarefa:last-child {
+    border-bottom: 0;
+}
+
+.info-item-modal {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3.8px;
+}
+
+.info-item-modal strong {
+    font-size: 11.2px;
+    color: var(--cor-texto-forte);
+}
+
+.info-item-modal span {
+    font-size: 11px;
+    color: var(--cor-suave);
+}
+
+.info-item-modal .prioridade {
+    align-self: flex-start;
+}
+
+.acoes-item-modal {
+    display: flex;
+    gap: 4.5px;
+    flex-shrink: 0;
+}
+
+.botao-editar-modal,
+.botao-excluir-modal {
+    width: 25.5px;
+    height: 25.5px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 7.5px;
+    background: var(--cor-superficie);
+    cursor: pointer;
+}
+
+.botao-editar-modal:hover {
+    border-color: color-mix(in srgb, var(--cor-acento) 40%, var(--cor-borda));
+    background: var(--cor-acento-suave);
+}
+
+.botao-excluir-modal:hover {
+    border-color: color-mix(in srgb, var(--cor-vermelho) 40%, var(--cor-borda));
+    background: color-mix(in srgb, var(--cor-vermelho) 10%, var(--cor-superficie));
+}
+
+.formulario-modal {
+    padding: 12px 15px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10.5px;
+}
+
+.grupo-modal {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5px;
+}
+
+.grupo-modal label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cor-suave);
+}
+
+.grupo-modal input,
+.grupo-modal select,
+.grupo-modal textarea {
+    width: 100%;
+    padding: 8.2px 9px;
+    border: 1.5px solid var(--cor-borda);
+    border-radius: 9px;
+    background: var(--cor-fundo);
+    color: var(--cor-texto-forte);
+    font: inherit;
+    font-size: 11px;
+    outline: none;
+}
+
+.grupo-modal textarea {
+    min-height: 48px;
+    resize: vertical;
+}
+
+.grupo-modal input:focus,
+.grupo-modal select:focus,
+.grupo-modal textarea:focus {
+    background: var(--cor-superficie);
+    border-color: var(--cor-acento);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-acento) 14%, transparent);
+}
+
+.linha-modal {
+    display: flex;
+    gap: 9px;
+}
+
+.botoes-modal {
+    display: flex;
+    justify-content: flex-end;
+    gap: 7.5px;
+}
+
+.botao-cancelar-modal {
+    height: 31.5px;
+    padding: 0 13.5px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 9px;
+    background: var(--cor-superficie);
+    color: var(--cor-suave);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.botao-salvar-modal {
+    height: 31.5px;
+    padding: 0 15px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto);
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* CORRIGIDO: o hover agora escurece a cor do tema em vez de usar um azul fixo */
+.botao-salvar-modal:hover {
+    background: color-mix(in srgb, var(--cor-acento) 82%, #000000);
+}
+
+.botao-salvar-modal:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+
+/* =====================================================
+   AJUSTES: horário nas mini-tarefas e dias de outros meses
+===================================================== */
+
+.mini-tarefa {
+    align-items: flex-start;
+}
+
+.mini-tarefa i {
+    margin-top: 3.8px;
+}
+
+.mini-texto {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.mini-texto small {
+    font-size: 11px;
+    font-weight: 500;
+}
+
+#dias-calendario > div.vazio .numero-dia {
+    color: var(--cor-suave);
+    opacity: .55;
+    font-weight: 600;
+}
+
+
+/* =====================================================
+   CORREÇÃO: texto longo não pode sair da célula
+===================================================== */
+
+#dias-calendario > div {
+    overflow: hidden;
+}
+
+.lista-mini-tarefas {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.mini-tarefa {
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.mini-texto {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.mini-texto span,
+.mini-texto small {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.texto-pagina {
+    flex: 1;
+    min-width: 0;
+}
+
+.acoes-pagina {
+    flex-shrink: 0;
+}
+
+.seletor-visualizacao {
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   VISÃO DIA
+===================================================== */
+
+.navegacao-visualizacao {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.seta-dia {
+    display: none;
+    width: 30px;
+    height: 34px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    background: var(--cor-superficie);
+    color: var(--cor-acento);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    place-items: center;
+}
+
+.seta-dia:hover {
+    background: var(--cor-acento-suave);
+}
+
+.modo-dia .seta-dia {
+    display: grid;
+}
+
+.modo-dia .nova-tarefa {
+    display: none;
+}
+
+#dia .grade-agenda {
+    grid-template-columns: minmax(0, 1fr) 312px;
+    gap: 18px;
+    align-items: start;
+}
+
+.cartao-hoje {
+    padding: 16px 18px 18px;
+}
+
+.cabecalho-hoje {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.icone-hoje {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.icone-hoje .ic {
+    width: 26px;
+    height: 26px;
+}
+
+.cabecalho-hoje h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+    line-height: 1.2;
+}
+
+.cabecalho-hoje p {
+    font-size: 13px;
+    color: var(--cor-suave);
+    margin-top: 2px;
+}
+
+/* CORRIGIDO: texto sempre visível em qualquer tema (inclusive escuro) */
+.botao-nova-tarefa {
+    margin-left: auto;
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto) !important;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 11px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(21, 83, 240, .25);
+    white-space: nowrap;
+    transition: background .15s, filter .15s;
+}
+
+.botao-nova-tarefa *,
+.botao-nova-tarefa .ic {
+    color: inherit !important;
+}
+
+/* o hover escurece a cor do tema, em vez de usar um azul fixo */
+.botao-nova-tarefa:hover {
+    background: color-mix(in srgb, var(--cor-acento) 82%, #000000);
+    color: var(--cor-acento-texto) !important;
+}
+
+.tarefa {
+    gap: 14px;
+    padding: 10px 12px;
+    min-height: 58px;
+    border-radius: 14px;
+}
+
+.tarefa-concluida {
+    background: var(--cor-fundo);
+}
+
+.marcador {
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 2px solid #b5c0d8;
+    border-radius: 7px;
+    background: var(--cor-superficie);
+    display: grid;
+    place-items: center;
+}
+
+.tarefa-concluida .marcador {
+    background: var(--cor-acento);
+    border-color: var(--cor-acento);
+    border-radius: 50%;
+}
+
+.tarefa-concluida .marcador::after {
+    content: "";
+    width: 5px;
+    height: 9px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.hora-tarefa {
+    width: 44px;
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+}
+
+.informacoes-tarefa strong {
+    font-size: 14px;
+}
+
+.informacoes-tarefa span {
+    font-size: 12px;
+}
+
+.tarefa-concluida .informacoes-tarefa span {
+    text-decoration: line-through;
+    color: #9aa6bf;
+}
+
+.categoria-tarefa {
+    min-width: 64px;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    background: #e8edf7;
+    color: var(--cor-suave);
+}
+
+.cat-estudos { background: #dbe7ff; color: #1553f0; }
+.cat-trabalho { background: #d6e9fb; color: #0b66b5; }
+.cat-saude { background: #fbd4da; color: #d12a48; }
+.cat-pessoal { background: #e4dffb; color: var(--cor-roxo); }
+
+.tarefa .prioridade {
+    min-width: 68px;
+    text-align: center;
+    border-radius: 99px;
+    font-size: 11px;
+}
+
+.menu-tarefa {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    color: var(--cor-texto);
+    font-size: 18px;
+    font-weight: 800;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.menu-tarefa:hover {
+    background: var(--cor-acento-suave);
+}
+
+.lembrete-dia {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 10px;
+    padding: 13px 16px;
+    border-radius: 14px;
+    background: var(--cor-acento-suave);
+    font-size: 13px;
+    color: var(--cor-texto-forte);
+}
+
+.lembrete-dia .ic {
+    width: 20px;
+    height: 20px;
+}
+
+.lembrete-dia a {
+    margin-left: auto;
+    color: var(--cor-acento);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.topo-cartao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.topo-cartao .ic {
+    width: 24px;
+    height: 24px;
+    color: var(--cor-acento);
+}
+
+.topo-cartao strong {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+}
+
+.topo-cartao a {
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cor-acento);
+}
+
+.cartao-financeiro .rotulo-pequeno {
+    font-size: 12px;
+    margin: 0;
+}
+
+.status-financeiro {
+    background: none;
+    padding: 0;
+    font-size: 13px;
+    margin: 2px 0 10px;
+}
+
+.porcentagem {
+    align-items: baseline;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+    margin-bottom: 6px;
+}
+
+.porcentagem strong {
+    font-size: 15px;
+}
+
+.progresso,
+.progresso-meta {
+    height: 8px;
+    background: var(--cor-acento-suave);
+    border-radius: 99px;
+    margin-bottom: 10px;
+}
+
+.mensagem-financeira {
+    font-size: 11px;
+    color: var(--cor-suave);
+    margin-top: 2px;
+}
+
+.meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.icone-meta {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    background: #f1e8fb;
+    color: var(--cor-acento);
+}
+
+.icone-meta.rosa {
+    background: #fde3e8;
+    color: var(--cor-vermelho);
+}
+
+.icone-meta .ic {
+    width: 18px;
+    height: 18px;
+}
+
+.corpo-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.cabecalho-meta {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--cor-texto-forte);
+}
+
+.corpo-meta .progresso-meta {
+    margin-bottom: 0;
+}
+
+.cartao-evento .demonstrativo {
+    margin-left: auto;
+}
+
+.informacoes-evento p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cor-texto-forte);
+    line-height: 1.4;
+}
+
+.link-agenda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+}
+
+.link-agenda .ic {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* =====================================================
+   VISÃO SEMANA
+===================================================== */
+
+/* CORRIGIDO: texto sempre visível e hover que segue o tema */
+.nova-tarefa {
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto) !important;
+    box-shadow: 0 6px 12px rgba(21, 83, 240, .25);
+    transition: background .15s;
+}
+
+.nova-tarefa:hover {
+    background: color-mix(in srgb, var(--cor-acento) 82%, #000000);
+    color: var(--cor-acento-texto) !important;
+}
+
+.cartao-semana {
+    padding: 14px 14px 12px;
+}
+
+.cabecalho-semana {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.seta-semana {
+    width: 36px;
+    height: 34px;
+    flex-shrink: 0;
+    border: 0;
+    border-radius: 10px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-size: 20px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.seta-semana:hover {
+    background: color-mix(in srgb, var(--cor-acento) 16%, var(--cor-superficie));
+}
+
+.titulo-semana {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+}
+
+.titulo-semana .ic {
+    width: 20px;
+    height: 20px;
+    color: var(--cor-acento);
+}
+
+.botao-semana-atual {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 34px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.botao-semana-atual .ic {
+    width: 16px;
+    height: 16px;
+}
+
+.calendario-semana {
+    gap: 7px;
+}
+
+.dia-semana {
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    padding: 10px 8px;
+    border-radius: 14px;
+}
+
+.cabecalho-dia-semana {
+    gap: 1px;
+    margin-bottom: 8px;
+}
+
+.cabecalho-dia-semana span {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+}
+
+.cabecalho-dia-semana strong {
+    font-size: 20px;
+}
+
+.cabecalho-dia-semana small {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--cor-suave);
+    margin-top: 2px;
+    min-height: 1.3em;
+}
+
+.dia-semana.dia-atual small {
+    color: var(--cor-suave);
+}
+
+.tarefas-dia {
+    flex: 1;
+    gap: 6px;
+    margin-top: 0;
+}
+
+.tarefa-semana {
+    --bg: #e8edf7;
+    --cor: #3d4d66;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 7px 8px 8px;
+    border-radius: 10px;
+    background: var(--bg);
+}
+
+.tsc-estudos { --bg: #e9e4fb; --cor: #5b3fd6; }
+.tsc-trabalho { --bg: #d6f3e6; --cor: #137a4f; }
+.tsc-saude { --bg: #fbd8de; --cor: #d12a48; }
+.tsc-pessoal { --bg: #dbe7ff; --cor: #1553f0; }
+
+.topo-tarefa-semana {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.radio-tarefa {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    border: 1.5px solid #b5c0d8;
+    border-radius: 50%;
+    background: var(--cor-superficie);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.radio-tarefa:hover {
+    border-color: var(--cor-acento);
+}
+
+.tarefa-semana-concluida .radio-tarefa {
+    background: var(--cor-acento);
+    border-color: var(--cor-acento);
+}
+
+.tarefa-semana-concluida strong {
+    text-decoration: line-through;
+    opacity: .6;
+}
+
+.hora-semana {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--cor);
+}
+
+/* Texto escuro fixo: o fundo pastel da tarefa não muda com o tema */
+.menu-tarefa-semana {
+    margin-left: auto;
+    border: 0;
+    background: none;
+    color: #0f1f5c;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.tarefa-semana strong {
+    font-size: 11px;
+    font-weight: 700;
+    color: #0f1f5c;
+    overflow-wrap: anywhere;
+    line-height: 1.3;
+}
+
+.categoria-mini {
+    align-self: flex-start;
+    padding: 2px 8px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(255, 255, 255, .6);
+    color: var(--cor);
+}
+
+.vazio-semana {
+    flex: 1;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 8px;
+    border-radius: 10px;
+    background: var(--cor-fundo);
+    text-align: center;
+    font-size: 11px;
+    color: var(--cor-suave);
+}
+
+.vazio-semana .ic {
+    width: 20px;
+    height: 20px;
+    color: var(--cor-suave);
+}
+
+.vazio-semana a {
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 9px;
+    font-size: 11px;
+}
+
+.vazio-semana .emoji {
+    font-size: 14px;
+}
+
+.vazio-semana .rosa {
+    color: var(--cor-vermelho);
+}
+
+.rodape-semana {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 14px;
+    padding: 10px 14px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+    background: var(--cor-fundo);
+}
+
+.grupo-semana {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.botao-semana {
+    height: 34px;
+    padding: 0 16px;
+    border: 0;
+    border-radius: 10px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-suave);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.botao-semana:hover {
+    background: color-mix(in srgb, var(--cor-acento) 16%, var(--cor-superficie));
+    color: var(--cor-acento);
+}
+
+.rodape-semana .titulo-semana {
+    font-size: 13px;
+}
+
+.destaque {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+}
+
+.destaque + .destaque {
+    border-top: 1px solid var(--cor-borda);
+}
+
+.titulo-lateral + .destaque {
+    padding-top: 2px;
+}
+
+.icone-destaque {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.icone-destaque .ic {
+    width: 20px;
+    height: 20px;
+}
+
+.destaque b {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cor-texto-forte);
+}
+
+.destaque small {
+    font-size: 12px;
+    color: var(--cor-suave);
+}
+
+.destaque em {
+    margin-left: auto;
+    font-style: normal;
+    color: var(--cor-acento);
+    font-size: 18px;
+}
+
+.destaque:hover b {
+    color: var(--cor-acento);
+}
+
+.cartao-motivacao {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    background: linear-gradient(120deg,
+        var(--cor-acento-suave),
+        color-mix(in srgb, var(--cor-acento) 22%, var(--cor-superficie)));
+    color: var(--cor-acento);
+    font-size: 13px;
+    font-weight: 600;
+    position: relative;
+}
+
+.cartao-motivacao p {
+    padding-right: 26px;
+    line-height: 1.4;
+}
+
+.montanha {
+    width: 48px;
+    height: 42px;
+    flex-shrink: 0;
+}
+
+/* Cores do desenho seguem o tema (sobrepõem as cores fixas do HTML) */
+.montanha path:nth-child(1) {
+    fill: var(--cor-acento-suave);
+    stroke: var(--cor-acento);
+}
+
+.montanha path:nth-child(2) {
+    fill: var(--cor-acento);
+    stroke: var(--cor-acento);
+}
+
+.brilho-motivacao {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 22px;
+    opacity: .5;
+}
+
+
+/* =====================================================
+   RESPONSIVO
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .conteudo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    #semana .grade-agenda,
+    #dia .grade-agenda {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 760px) {
+
+    .cartao-semana {
+        overflow-x: auto;
+    }
+
+    .calendario-semana {
+        min-width: 487.5px;
+    }
+
+    .barra-lateral {
+        display: none;
+    }
+
+    .barra-superior {
+        padding: 0 9px;
+    }
+
+    .cabecalho-pagina {
+        flex-wrap: wrap;
+    }
+
+    .acoes-pagina {
+        margin-left: 0;
+        flex-wrap: wrap;
+    }
+
+    .titulo-mes strong {
+        font-size: 18px;
+    }
+
+    .botao-visualizacao {
+        padding: 0 12px;
+    }
+
+    #dias-calendario > * {
+        min-height: 51px;
+        padding: 3.8px;
+        font-size: 11px;
+    }
+}

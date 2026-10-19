@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIPAID - Agenda</title>
+    <script src="tema.js"></script>
+    <link rel="stylesheet" href="notificacoes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="agenda.css">
+    <link rel="stylesheet" href="aviso.css">
+</head>
+
+<body>
+
+    <!-- Ícones reutilizáveis -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-home" viewBox="0 0 24 24">
+            <path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/>
+        </symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M8 2v4M16 2v4M3 10h18M8 14h2M14 14h2M8 18h2"/>
+        </symbol>
+        <symbol id="i-notes" viewBox="0 0 24 24">
+            <rect x="4" y="3" width="16" height="18" rx="2"/>
+            <path d="M8 8h8M8 12h8M8 16h5"/>
+        </symbol>
+        <symbol id="i-money" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M14.5 9c-.5-1-1.5-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6v12"/>
+        </symbol>
+        <symbol id="i-target" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <circle cx="12" cy="12" r="5"/>
+            <circle cx="12" cy="12" r="1"/>
+        </symbol>
+        <symbol id="i-star" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.5 5.7 21l1.5-7L2 9.3l7-.8z"/>
+        </symbol>
+        <symbol id="i-enem" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M12 4L1 9l11 5 9-4.1V15h2V9zM5 13v4c0 1.5 3 3 7 3s7-1.5 7-3v-4l-7 3.2z"/>
+        </symbol>
+        <symbol id="i-gear" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/>
+        </symbol>
+        <symbol id="i-user" viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="4" fill="currentColor" stroke="none"/>
+            <path fill="currentColor" stroke="none" d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/>
+        </symbol>
+        <symbol id="i-bot" viewBox="0 0 24 24">
+            <rect x="4" y="8" width="16" height="12" rx="3" fill="currentColor" stroke="none"/>
+            <path d="M12 4v4"/>
+            <circle cx="9" cy="14" r="1.3" fill="#fff" stroke="none"/>
+            <circle cx="15" cy="14" r="1.3" fill="#fff" stroke="none"/>
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+            <path d="M21 12a9 9 0 1 1-5-8M8 12l3 3 9-10"/>
+        </symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19a2 2 0 0 0 4 0z"/>
+        </symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24">
+            <path fill="currentColor" stroke="none" d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/>
+        </symbol>
+        <symbol id="i-bell-o" viewBox="0 0 24 24">
+            <path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 19a2 2 0 0 0 4 0"/>
+        </symbol>
+        <symbol id="i-trophy" viewBox="0 0 24 24">
+            <path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v4M8 21h8M10 17h4"/>
+        </symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24">
+            <path d="M4 20h16M6 16l4-5 3 3 5-7M15 7h3v3"/>
+        </symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/>
+            <path d="M12 7v5l3 2" stroke="#fff"/>
+        </symbol>
+    </svg>
+
+    <div class="aplicativo">
+
+        <aside class="barra-lateral">
+
+            <div class="area-logo">
+                <div class="simbolo-logo">B</div>
+
+                <div>
+                    <div class="texto-logo">BIPAID</div>
+                    <small class="slogan-logo">Organize sua vida</small>
+                </div>
+            </div>
+
+            <div class="subtitulo-logo">
+                Você fala.<br>
+                A BIPAID organiza.
+            </div>
+
+            <nav class="menu-lateral">
+
+                <a href="paginainicial.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-home"/></svg>
+                    </span>
+                    <span class="texto-menu">Início</span>
+                </a>
+
+                <a href="#mes" class="link-menu ativo">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-cal"/></svg>
+                    </span>
+                    <span class="texto-menu">Agenda</span>
+                </a>
+
+                <a href="nota.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-notes"/></svg>
+                    </span>
+                    <span class="texto-menu">Notas</span>
+                </a>
+
+                <a href="meudinheiro.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-money"/></svg>
+                    </span>
+                    <span class="texto-menu">Meu Dinheiro</span>
+                </a>
+
+                <a href="metas.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-target"/></svg>
+                    </span>
+                    <span class="texto-menu">Minhas Metas</span>
+                </a>
+
+                <a href="eventos.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-star"/></svg>
+                    </span>
+                    <span class="texto-menu">Eventos EPT</span>
+                </a>
+
+                <a href="semana.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-cal"/></svg>
+                    </span>
+                    <span class="texto-menu">Minha Semana</span>
+                </a>
+
+                <a href="enem.html" class="link-menu">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-enem"/></svg>
+                    </span>
+                    <span class="texto-menu">ENEM</span>
+                </a>
+
+            </nav>
+
+            <div class="parte-inferior">
+
+                <a href="ajustes.html" class="link-menu link-configuracoes">
+                    <span class="icone-menu">
+                        <svg class="ic"><use href="#i-gear"/></svg>
+                    </span>
+                    <span class="texto-menu">Ajustes</span>
+                </a>
+
+                <!-- PERFIL DO MENU LATERAL: DIRECIONA PARA perfil.html -->
+                <a href="perfil.html" class="perfil-usuario"
+                   style="text-decoration: none; color: inherit; cursor: pointer;">
+
+                    <div class="avatar-usuario">US</div>
+
+                    <div class="informacoes-usuario">
+                        <strong class="nome-usuario">Usuário</strong>
+                        <span><i class="ponto-online"></i>Conta conectada</span>
+                    </div>
+
+                    <span class="seta-perfil">›</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="conteudo-principal">
+
+            <header class="barra-superior">
+
+                <div class="caminho-pagina">
+                    <svg class="ic"><use href="#i-home"/></svg>
+                    <strong>BIPAID</strong>
+                    <em>›</em>
+                    <svg class="ic"><use href="#i-cal"/></svg>
+                    <span>Agenda</span>
+                </div>
+
+                <div class="acoes-superiores">
+
+                    <button type="button" class="notificacao" aria-label="Notificações">
+                        <svg class="ic"><use href="#i-bell-o"/></svg>
+                    </button>
+
+                    <a href="perfil.html" class="botao-perfil" aria-label="Abrir perfil do usuário" style="color: inherit; text-decoration: none;">
+                        <svg class="ic"><use href="#i-user"/></svg>
+                        <span class="nome-usuario">Usuário</span>
+                        <span>></span>
+                    </a>
+
+                </div>
+
+            </header>
+
+            <div class="conteudo">
+
+                <div class="cabecalho-pagina">
+
+                    <div class="icone-pagina">
+                        <svg class="ic"><use href="#i-cal"/></svg>
+                    </div>
+
+                    <div class="texto-pagina">
+                        <h1>Agenda</h1>
+                        <p>Organize suas tarefas, compromissos e objetivos.</p>
+                    </div>
+
+                    <div class="acoes-pagina">
+
+                        <a href="agendatarefa.html" class="nova-tarefa">＋ Nova tarefa</a>
+
+                        <div class="navegacao-visualizacao">
+
+                            <button type="button" class="seta-dia" id="dia-anterior" aria-label="Dia anterior">
+                                ‹
+                            </button>
+
+                            <div class="seletor-visualizacao">
+                                <a href="#dia" class="botao-visualizacao">Dia</a>
+                                <a href="#semana" class="botao-visualizacao">Semana</a>
+                                <a href="#mes" class="botao-visualizacao">Mês</a>
+                            </div>
+
+                            <button type="button" class="seta-dia" id="dia-proximo" aria-label="Próximo dia">
+                                ›
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="aviso-progresso">
+                    <div class="lampada">💡</div>
+
+                    <div>
+                        <strong>Seu progresso importa!</strong>
+                        <p>Cada tarefa concluída te aproxima dos seus sonhos.</p>
+                    </div>
+
+                    <span class="brilho">✦</span>
+                </div>
+
+                <!-- VISUALIZAÇÃO DO DIA -->
+                <section id="dia" class="visualizacao-agenda">
+
+                    <div class="grade-agenda">
+
+                        <div class="cartao cartao-hoje">
+
+                            <div class="cabecalho-cartao">
+
+                                <div class="titulo-cartao">
+                                    ▦
+                                    <strong>AGENDA DE HOJE</strong>
+                                </div>
+
+                                <a href="agendatarefa.html" class="botao-nova-tarefa">＋ Nova tarefa</a>
+
+                            </div>
+
+                            <div class="tarefas" id="tarefas-hoje">
+                                <p class="sem-tarefas">
+                                    Carregando tarefas...
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="coluna-lateral">
+
+                            <div class="cartao cartao-financeiro">
+
+                                <div class="cabecalho-cartao">
+                                    <div class="titulo-cartao">
+                                        ▣
+                                        <strong>PANORAMA FINANCEIRO</strong>
+                                    </div>
+                                    <a href="#">Detalhes</a>
+                                </div>
+
+                                <p class="rotulo-pequeno">
+                                    Limite mensal restante
+                                </p>
+
+                                <span class="status-financeiro">
+                                    ↘ gastos sob controle
+                                </span>
+
+                                <div class="porcentagem">
+                                    <span>Uso do limite</span>
+                                    <strong>58%</strong>
+                                </div>
+
+                                <div class="progresso">
+                                    <div></div>
+                                </div>
+
+                                <div class="mensagem-financeira">
+                                    Você está próximo da sua meta financeira.
+                                    Continue reservando R$ 50 por semana.
+                                </div>
+
+                            </div>
+
+                            <div class="cartao cartao-metas">
+
+                                <div class="topo-cartao">
+                                    <svg class="ic"><use href="#i-target"/></svg>
+                                    <strong>Metas em movimento</strong>
+                                    <a href="metas.html">Ver todas →</a>
+                                </div>
+
+                                <div class="meta">
+
+                                    <div class="icone-meta">
+                                        <svg class="ic"><use href="#i-enem"/></svg>
+                                    </div>
+
+                                    <div class="corpo-meta">
+                                        <div class="cabecalho-meta">
+                                            <span>Estudar para o ENEM</span>
+                                            <strong>75%</strong>
+                                        </div>
+
+                                        <div class="progresso-meta">
+                                            <div class="azul" style="width:75%"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="meta">
+
+                                    <div class="icone-meta rosa">
+                                        <svg class="ic"><use href="#i-heart"/></svg>
+                                    </div>
+
+                                    <div class="corpo-meta">
+                                        <div class="cabecalho-meta">
+                                            <span>Cuidar da saúde</span>
+                                            <strong>40%</strong>
+                                        </div>
+
+                                        <div class="progresso-meta">
+                                            <div class="verde" style="width:40%"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="cartao cartao-evento">
+
+                                <div class="titulo-cartao">
+                                    ♧
+                                    <strong>PRÓXIMO EVENTO EPT</strong>
+                                    <span class="demonstrativo">Demonstrativo</span>
+                                </div>
+
+                                <div class="evento">
+
+                                    <div class="data-evento">
+                                        <strong>18</strong>
+                                        <span>SET</span>
+                                    </div>
+
+                                    <div class="informacoes-evento">
+                                        <p>Projetos de tecnologia, empreendedorismo e educação profissional.</p>
+                                        <span>14:00 · Auditório Central</span>
+                                    </div>
+
+                                </div>
+
+                                <a href="agenda.html" class="link-agenda">
+                                    <svg class="ic"><use href="#i-cal"/></svg>
+                                    Adicionar à agenda
+                                </a>
+
+                            </div>
+
+                            <a href="#" class="link-agenda">
+                                ▦ &nbsp; Adicionar à agenda
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- VISUALIZAÇÃO DA SEMANA -->
+                <section id="semana" class="visualizacao-agenda">
+
+                    <div class="grade-agenda">
+
+                        <div class="cartao cartao-semana">
+
+                            <div class="cabecalho-semana">
+
+                                <button type="button" class="seta-semana" data-semana="-1" aria-label="Semana anterior">
+                                    ‹
+                                </button>
+
+                                <div class="titulo-semana">
+                                    <svg class="ic"><use href="#i-cal"/></svg>
+                                    <span class="rotulo-semana"></span>
+                                </div>
+
+                                <button type="button" class="botao-semana-atual" data-semana="atual">
+                                    <svg class="ic"><use href="#i-cal"/></svg>
+                                    Semana atual
+                                </button>
+
+                                <button type="button" class="seta-semana" data-semana="1" aria-label="Próxima semana">
+                                    ›
+                                </button>
+
+                            </div>
+
+                            <div class="calendario-semana" id="calendario-semana"></div>
+
+                            <div class="rodape-semana">
+
+                                <div class="grupo-semana">
+                                    <button type="button" class="seta-semana" data-semana="-1" aria-label="Semana anterior">
+                                        ‹
+                                    </button>
+                                    <button type="button" class="botao-semana" data-semana="-1">
+                                        Semana anterior
+                                    </button>
+                                </div>
+
+                                <div class="titulo-semana">
+                                    <svg class="ic"><use href="#i-cal"/></svg>
+                                    <span class="rotulo-semana"></span>
+                                </div>
+
+                                <div class="grupo-semana">
+                                    <button type="button" class="botao-semana" data-semana="1">
+                                        Próxima semana
+                                    </button>
+                                    <button type="button" class="seta-semana" data-semana="1" aria-label="Próxima semana">
+                                        ›
+                                    </button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="coluna-lateral">
+
+                            <div class="cartao-lateral">
+
+                                <div class="titulo-lateral">
+                                    ⓘ &nbsp; PRIORIDADES
+                                </div>
+
+                                <div class="linha-prioridade">
+                                    <i class="ponto fundo-vermelho"></i>
+                                    Urgente
+                                    <strong class="vermelho" id="quantidade-urgente">
+                                        0 tarefas
+                                    </strong>
+                                </div>
+
+                                <div class="linha-prioridade">
+                                    <i class="ponto fundo-laranja"></i>
+                                    Importante
+                                    <strong class="laranja" id="quantidade-importante">
+                                        0 tarefas
+                                    </strong>
+                                </div>
+
+                                <div class="linha-prioridade">
+                                    <i class="ponto fundo-verde"></i>
+                                    Normal
+                                    <strong class="texto-verde" id="quantidade-normal">
+                                        0 itens
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                            <div class="cartao-lateral">
+
+                                <div class="titulo-lateral">
+                                    <svg class="ic"><use href="#i-star"/></svg>
+                                    Destaques da semana
+                                </div>
+
+                                <a href="#semana" class="destaque">
+                                    <span class="icone-destaque">
+                                        <svg class="ic"><use href="#i-cal"/></svg>
+                                    </span>
+                                    <span>
+                                        <b>Mais produtiva</b>
+                                        <small id="destaque-produtiva">Sem tarefas na semana</small>
+                                    </span>
+                                    <em>›</em>
+                                </a>
+
+                                <a href="metas.html" class="destaque">
+                                    <span class="icone-destaque">
+                                        <svg class="ic"><use href="#i-trophy"/></svg>
+                                    </span>
+                                    <span>
+                                        <b>Meta em foco</b>
+                                        <small>Estudar para o ENEM</small>
+                                    </span>
+                                    <em>›</em>
+                                </a>
+
+                                <a href="meudinheiro.html" class="destaque">
+                                    <span class="icone-destaque">
+                                        <svg class="ic"><use href="#i-chart"/></svg>
+                                    </span>
+                                    <span>
+                                        <b>Gastos sob controle</b>
+                                        <small>58% do limite mensal</small>
+                                    </span>
+                                    <em>›</em>
+                                </a>
+
+                            </div>
+
+                            <div class="cartao-motivacao">
+
+                                <svg class="montanha" viewBox="0 0 64 56" aria-hidden="true">
+                                    <path d="M4 50L26 18l10 14 8-10 16 28z" fill="#dbe7ff" stroke="#1b4fc8" stroke-width="3" stroke-linejoin="round"/>
+                                    <path d="M26 18V4M26 4l12 5-12 5" stroke="#1b4fc8" stroke-width="3" fill="#1b4fc8" stroke-linejoin="round" stroke-linecap="round"/>
+                                </svg>
+
+                                <p>Pequenos passos todos os dias geram grandes resultados!</p>
+                                <span class="brilho-motivacao">✦</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- VISUALIZAÇÃO DO MÊS -->
+                <section id="mes" class="visualizacao-agenda">
+
+                    <div class="grade-agenda">
+
+                        <div class="cartao cartao-mes">
+
+                            <div class="calendario-mes">
+
+                                <div class="cabecalho-mes">
+
+                                    <button
+                                        type="button"
+                                        class="seta-mes"
+                                        id="mes-anterior"
+                                        aria-label="Mês anterior">
+                                        ‹
+                                    </button>
+
+                                    <div class="titulo-mes">
+                                        <svg class="ic"><use href="#i-cal"/></svg>
+                                        <strong id="mes-atual">
+                                            Setembro 2026
+                                        </strong>
+                                    </div>
+
+                                    <button
+                                        type="button"
+                                        class="seta-mes"
+                                        id="mes-proximo"
+                                        aria-label="Próximo mês">
+                                        ›
+                                    </button>
+
+                                </div>
+
+                                <div class="dias-semana">
+                                    <span>Dom</span>
+                                    <span>Seg</span>
+                                    <span>Ter</span>
+                                    <span>Qua</span>
+                                    <span>Qui</span>
+                                    <span>Sex</span>
+                                    <span>Sáb</span>
+                                </div>
+
+                                <div id="dias-calendario"></div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="coluna-lateral">
+
+                            <div class="cartao-lateral">
+
+                                <div class="titulo-lateral">
+                                    ⓘ &nbsp; PRIORIDADES
+                                </div>
+
+                                <div class="linha-prioridade">
+                                    <i class="ponto fundo-vermelho"></i>
+                                    Urgente
+                                    <strong class="vermelho" id="mes-quantidade-urgente">
+                                        0 tarefas
+                                    </strong>
+                                </div>
+
+                                <div class="linha-prioridade">
+                                    <i class="ponto fundo-laranja"></i>
+                                    Importante
+                                    <strong class="laranja" id="mes-quantidade-importante">
+                                        0 tarefas
+                                    </strong>
+                                </div>
+
+                                <div class="linha-prioridade">
+                                    <i class="ponto fundo-verde"></i>
+                                    Normal
+                                    <strong class="texto-verde" id="mes-quantidade-normal">
+                                        0 itens
+                                    </strong>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="usuario.js"></script>
+      <script>
+    mostrarUsuario();
+    </script>
+    <script src="notificacoes.js"></script>
+    <script src="aviso.js"></script>
+    <script src="agenda.js"></script>
+    
+
+</body>
+</html>

@@ -1,0 +1,1087 @@
+
+/* =====================================================
+   VARIÁVEIS DE TEMA
+   Padronizadas com a página inicial da BIPAID
+===================================================== */
+
+:root {
+    --cor-fundo: #f3f6fd;
+    --cor-superficie: #ffffff;
+    --cor-texto: #1b2a5e;
+    --cor-texto-forte: #0f1f5c;
+    --cor-suave: #5b6892;
+    --cor-borda: #e3e9f7;
+    --cor-acento: #1553f0;
+    --cor-acento-suave: #e9f0ff;
+    --cor-acento-texto: #ffffff;
+
+    --cor-vermelho: #e8455f;
+    --cor-laranja: #f5a524;
+    --cor-verde: #22a06b;
+    --cor-roxo: #5b3fd6;
+
+    --escala-fonte: 1;
+    --alvo-toque-min: 38px;
+}
+
+/* ---- Tema escuro ---- */
+
+[data-tema="escuro"] {
+    --cor-fundo: #121722;
+    --cor-superficie: #1b2230;
+    --cor-texto: #eef1f7;
+    --cor-texto-forte: #ffffff;
+    --cor-suave: #9aa7bd;
+    --cor-borda: #2a3344;
+    --cor-acento: #5a93ff;
+    --cor-acento-suave: #24344f;
+    --cor-acento-texto: #0d1420;
+}
+
+/* ---- Tema roxo ---- */
+
+[data-tema="roxo"] {
+    --cor-fundo: #f6f3fd;
+    --cor-superficie: #ffffff;
+    --cor-texto: #271c42;
+    --cor-texto-forte: #1c1335;
+    --cor-suave: #6f6288;
+    --cor-borda: #e7defa;
+    --cor-acento: #7c4de0;
+    --cor-acento-suave: #ece2fb;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Tema verde ---- */
+
+[data-tema="verde"] {
+    --cor-fundo: #f2faf5;
+    --cor-superficie: #ffffff;
+    --cor-texto: #15302a;
+    --cor-texto-forte: #0e241f;
+    --cor-suave: #577168;
+    --cor-borda: #dcf0e4;
+    --cor-acento: #1f9d63;
+    --cor-acento-suave: #dcf4e6;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Tema rosa ---- */
+
+[data-tema="rosa"] {
+    --cor-fundo: #fdf4f7;
+    --cor-superficie: #ffffff;
+    --cor-texto: #3a1f2a;
+    --cor-texto-forte: #2c1620;
+    --cor-suave: #8a6373;
+    --cor-borda: #f6dde5;
+    --cor-acento: #df4f80;
+    --cor-acento-suave: #fbe3ec;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Tema azul ---- */
+
+[data-tema="azul"] {
+    --cor-fundo: #eef4ff;
+    --cor-superficie: #ffffff;
+    --cor-texto: #122048;
+    --cor-texto-forte: #0b1733;
+    --cor-suave: #51628c;
+    --cor-borda: #d8e4fb;
+    --cor-acento: #2f6fef;
+    --cor-acento-suave: #dde9ff;
+    --cor-acento-texto: #ffffff;
+}
+
+/* ---- Alto contraste ---- */
+
+[data-contraste="alto"] {
+    --cor-borda: currentColor;
+}
+
+[data-contraste="alto"] body {
+    --cor-texto: #000000;
+    --cor-texto-forte: #000000;
+    --cor-suave: #000000;
+}
+
+[data-tema="escuro"][data-contraste="alto"] body {
+    --cor-texto: #ffffff;
+    --cor-texto-forte: #ffffff;
+    --cor-suave: #ffffff;
+    --cor-fundo: #000000;
+    --cor-superficie: #0a0a0a;
+}
+
+[data-contraste="alto"] .cartao-nota,
+[data-contraste="alto"] .cartao-lista,
+[data-contraste="alto"] .nota-item {
+    border-width: 2px;
+}
+
+/* ---- Área de toque maior ---- */
+
+[data-area-toque="grande"] {
+    --alvo-toque-min: 52px;
+}
+
+[data-area-toque="grande"] .link-menu,
+[data-area-toque="grande"] .botao-perfil,
+[data-area-toque="grande"] .botao-cancelar,
+[data-area-toque="grande"] .botao-salvar,
+[data-area-toque="grande"] .botao-menu-nota {
+    min-height: var(--alvo-toque-min);
+}
+
+
+/* =====================================================
+   BASE
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: calc(16px * var(--escala-fonte));
+}
+
+body {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: var(--cor-fundo);
+    color: var(--cor-texto);
+    transition: background .2s, color .2s;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ic {
+    width: 19.5px;
+    height: 19.5px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.aplicativo {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =====================================================
+   MENU LATERAL
+   Padronizado com a página inicial
+===================================================== */
+
+.barra-lateral {
+    width: 234px;
+    background: var(--cor-superficie);
+    border-right: 1px solid var(--cor-borda);
+    padding: 13.5px 13.5px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    transition: background .2s, border-color .2s;
+}
+
+.area-logo {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.simbolo-logo {
+    width: 52.5px;
+    height: 49.5px;
+    border-radius: 13.5px;
+    background: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    color: #ffffff;
+    font-size: 31.5px;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4.5px 10.5px rgba(21, 83, 240, .3);
+}
+
+.texto-logo {
+    font-size: 25.5px;
+    font-weight: 800;
+    color: var(--cor-acento);
+    line-height: 1;
+}
+
+.slogan-logo {
+    font-size: 11.2px;
+    color: var(--cor-suave);
+}
+
+.subtitulo-logo {
+    margin: 13.5px 0 10.5px;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 500;
+}
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-menu {
+    display: flex;
+    align-items: center;
+    gap: 13.5px;
+    padding: 0 13.5px;
+    height: 39.8px;
+    margin: 3px 0;
+    border-radius: 9px;
+    font-weight: 600;
+    font-size: 14.2px;
+    color: var(--cor-texto);
+    transition: background .15s, color .15s;
+}
+
+.link-menu:hover {
+    background: var(--cor-acento-suave);
+}
+
+.icone-menu {
+    display: grid;
+    place-items: center;
+    color: var(--cor-acento);
+}
+
+.link-menu.ativo {
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 var(--cor-acento);
+}
+
+.parte-inferior {
+    margin-top: auto;
+    border-top: 1px solid var(--cor-borda);
+    padding-top: 10.5px;
+}
+
+.perfil-usuario {
+    margin-top: 10.5px;
+    background: var(--cor-acento-suave);
+    border-radius: 12px;
+    padding: 9px 10.5px;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.avatar-usuario {
+    width: 46.5px;
+    height: 46.5px;
+    border-radius: 50%;
+    background-image: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+    border: 3px solid #cfe0ff;
+    flex-shrink: 0;
+}
+
+.avatar-usuario.com-foto {
+    color: transparent;
+}
+
+.informacoes-usuario strong {
+    display: block;
+    color: var(--cor-acento);
+    font-size: 12.8px;
+}
+
+.informacoes-usuario span {
+    font-size: 11px;
+    color: var(--cor-suave);
+    display: flex;
+    align-items: center;
+    gap: 4.5px;
+}
+
+.ponto-online {
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background: var(--cor-verde);
+    display: inline-block;
+}
+
+.seta-perfil {
+    margin-left: auto;
+    color: var(--cor-acento);
+    font-size: 19.5px;
+}
+
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.conteudo-principal {
+    flex: 1;
+    min-width: 0;
+}
+
+.barra-superior {
+    height: 61.5px;
+    background: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 13.5px 0 21px;
+    transition: background .2s, border-color .2s;
+}
+
+.caminho-pagina {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-size: 14.2px;
+    font-weight: 600;
+    color: var(--cor-texto-forte);
+}
+
+.caminho-pagina .ic {
+    color: var(--cor-acento);
+}
+
+.caminho-pagina em {
+    font-style: normal;
+    color: var(--cor-suave);
+    font-weight: 400;
+}
+.acoes-superiores {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.notificacao {
+    width: 39.8px;
+    height: 39.8px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10.5px;
+    background: var(--cor-superficie);
+    color: var(--cor-suave);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, border-color .2s, color .2s;
+}
+
+.notificacao:hover {
+    background: var(--cor-fundo);
+    color: var(--cor-texto-forte);
+}
+
+.notificacao .ic {
+    width: 18px;
+    height: 18px;
+}
+
+.botao-perfil {
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto);
+    border-radius: 10.5px;
+    height: 39.8px;
+    padding: 0 16.5px;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-weight: 700;
+    font-size: 13.5px;
+    box-shadow: 0 4.5px 10.5px rgba(21, 83, 240, .25);
+}
+
+.botao-perfil .ic {
+    width: 16.5px;
+    height: 16.5px;
+}
+
+/* =====================================================
+   PÁGINA DE NOTAS — CABEÇALHO
+===================================================== */
+
+.conteudo-notas {
+    padding: 14px 20px 28px 22px;
+}
+
+.cabecalho-notas {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 6px 16px;
+}
+
+.ilustracao-notas {
+    width: 70px;
+    height: 70px;
+    border-radius: 22px;
+    background: var(--cor-acento-suave);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    transform: rotate(-6deg);
+}
+
+.ilustracao-notas svg {
+    width: 48px;
+    height: 48px;
+    color: var(--cor-acento);
+}
+
+.titulo-notas {
+    min-width: 0;
+}
+
+.etiqueta-notas {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .5px;
+    color: var(--cor-texto-forte);
+}
+
+.titulo-notas h1 {
+    margin: 2px 0 4px;
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--cor-texto-forte);
+}
+
+.titulo-notas p {
+    max-width: 540px;
+    font-size: 14px;
+    line-height: 1.45;
+    color: var(--cor-suave);
+}
+
+.frase-manuscrita {
+    margin-left: auto;
+    margin-right: 36px;
+    transform: rotate(-8deg);
+    font-family: "Caveat", "Segoe Script", cursive;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--cor-acento);
+}
+
+
+/* =====================================================
+   PÁGINA DE NOTAS — GRADE E CARTÕES
+===================================================== */
+
+.area-notas {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+    gap: 18px;
+    align-items: start;
+}
+
+.cartao-nota,
+.cartao-lista {
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 20px;
+    box-shadow: 0 4px 14px rgba(30, 60, 140, .07);
+    padding: 18px 20px;
+    transition: background .2s, border-color .2s, color .2s;
+}
+
+
+/* =====================================================
+   FORMULÁRIO DE NOVA NOTA
+===================================================== */
+
+.topo-formulario {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.topo-formulario h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+}
+
+.icone-topo {
+    width: 36px;
+    height: 36px;
+    border-radius: 11px;
+    background: var(--cor-acento-suave);
+    color: var(--cor-acento);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.icone-topo .ic {
+    width: 20px;
+    height: 20px;
+}
+
+.icone-topo.claro {
+    background: var(--cor-fundo);
+    color: var(--cor-acento);
+}
+
+.rotulo-campo {
+    display: block;
+    margin: 10px 0 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+}
+
+.rotulo-campo b {
+    color: var(--cor-vermelho);
+}
+
+.campo-titulo,
+.campo-conteudo {
+    width: 100%;
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    background: var(--cor-superficie);
+    font: inherit;
+    font-size: 13px;
+    color: var(--cor-texto-forte);
+    outline: none;
+    transition: border-color .15s, box-shadow .15s, background .2s;
+}
+
+.campo-titulo {
+    height: 40px;
+    padding: 0 14px;
+    border-radius: 99px;
+}
+
+.campo-conteudo {
+    display: block;
+    min-height: 150px;
+    padding: 12px 14px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+.campo-titulo::placeholder,
+.campo-conteudo::placeholder {
+    color: var(--cor-suave);
+    opacity: .8;
+}
+
+.campo-titulo:focus,
+.campo-conteudo:focus {
+    border-color: var(--cor-acento);
+    box-shadow: 0 0 0 3px rgba(21, 83, 240, .1);
+}
+
+.erro-nota {
+    min-height: 18px;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cor-vermelho);
+}
+
+.rodape-formulario {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+}
+
+
+/* ---- Seleção de cor da nota ---- */
+
+.selecao-cor > span {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    color: var(--cor-suave);
+}
+
+.cores-nota {
+    display: flex;
+    gap: 10px;
+}
+
+.cor-opcao {
+    width: 26px;
+    height: 26px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--c);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: transform .12s, box-shadow .12s;
+}
+
+.cor-opcao:hover {
+    transform: scale(1.1);
+}
+
+.cor-opcao.selecionada {
+    box-shadow:
+        0 0 0 3px var(--cor-superficie),
+        0 0 0 5px var(--cor-acento);
+}
+
+.cor-opcao.selecionada::after {
+    content: "";
+    width: 5px;
+    height: 10px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+
+/* ---- Botões do formulário ---- */
+
+.botoes-formulario {
+    display: flex;
+    gap: 12px;
+}
+
+.botao-cancelar,
+.botao-salvar {
+    height: 40px;
+    padding: 0 22px;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .2s, border-color .2s, box-shadow .2s;
+}
+
+.botao-cancelar {
+    border: 1.5px solid var(--cor-borda);
+    background: var(--cor-superficie);
+    color: var(--cor-acento);
+}
+
+.botao-cancelar:hover {
+    background: var(--cor-acento-suave);
+}
+
+.botao-salvar {
+    border: 0;
+    background: var(--cor-acento);
+    color: var(--cor-acento-texto);
+    box-shadow: 0 6px 12px rgba(21, 83, 240, .25);
+}
+
+.botao-salvar:hover {
+    filter: brightness(.92);
+}
+
+.botao-salvar .ic {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* ---- Legenda das cores ---- */
+
+.legenda-cores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 10px;
+    list-style: none;
+}
+
+.legenda-cores li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cor-suave);
+}
+
+.legenda-cores i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--c);
+}
+
+
+/* ---- Cores das notas ----
+   Mantidas para a identificação de cada nota.
+   Não mudam junto com o tema da página.
+===================================================== */
+
+.cor-azul {
+    --c: #2f6bef;
+    --t: #e0ebff;
+    --tx: #1553f0;
+}
+
+.cor-roxo {
+    --c: #8b5cf6;
+    --t: #ece5ff;
+    --tx: #6d3fd6;
+}
+
+.cor-rosa {
+    --c: #f0589b;
+    --t: #ffe1ee;
+    --tx: #c22d6f;
+}
+
+.cor-verde {
+    --c: #18b57a;
+    --t: #d9f6e9;
+    --tx: #137a4f;
+}
+
+.cor-amarelo {
+    --c: #f2b01e;
+    --t: #fff2cc;
+    --tx: #a86e00;
+}
+
+
+/* =====================================================
+   LISTA DE NOTAS
+===================================================== */
+
+.topo-lista {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.titulo-lista {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titulo-lista h2 {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+}
+
+.busca-notas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 190px;
+    height: 36px;
+    padding: 0 12px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 99px;
+    background: var(--cor-superficie);
+    color: var(--cor-suave);
+    transition: border-color .2s, background .2s;
+}
+
+.busca-notas .ic {
+    width: 16px;
+    height: 16px;
+}
+
+.busca-notas input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: none;
+    font: inherit;
+    font-size: 12px;
+    color: var(--cor-texto-forte);
+}
+
+.busca-notas input::placeholder {
+    color: var(--cor-suave);
+    opacity: .8;
+}
+
+.busca-notas:focus-within {
+    border-color: var(--cor-acento);
+    box-shadow: 0 0 0 3px rgba(21, 83, 240, .1);
+}
+
+.lista-notas {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 560px;
+    overflow-y: auto;
+    padding: 2px 4px 4px 0;
+}
+
+.sem-notas {
+    padding: 24px 16px;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--cor-suave);
+    background: var(--cor-fundo);
+    border: 1px dashed var(--cor-borda);
+    border-radius: 14px;
+}
+
+
+/* ---- Item da nota ---- */
+
+.nota-item {
+    position: relative;
+    display: flex;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid var(--cor-borda);
+    border-left: 4px solid var(--c);
+    border-radius: 14px;
+    background: var(--cor-superficie);
+    box-shadow: 0 3px 10px rgba(30, 60, 140, .06);
+    transition: background .2s, border-color .2s;
+}
+
+.icone-nota-item {
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: var(--t);
+    color: var(--c);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+}
+
+.icone-nota-item .ic {
+    width: 20px;
+    height: 20px;
+}
+
+.corpo-nota-item {
+    flex: 1;
+    min-width: 0;
+}
+
+.corpo-nota-item strong {
+    display: block;
+    padding-right: 28px;
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.corpo-nota-item p {
+    margin-top: 3px;
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--cor-suave);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+    white-space: pre-line;
+}
+
+.rodape-nota-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.data-nota {
+    font-size: 12px;
+    color: var(--cor-suave);
+}
+
+.tag-nota {
+    padding: 3px 12px;
+    border-radius: 99px;
+    background: var(--t);
+    color: var(--tx);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ---- Menu de opções da nota ---- */
+
+.area-menu-nota {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+.botao-menu-nota {
+    width: 28px;
+    height: 24px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--cor-texto-forte);
+    font-size: 9px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.botao-menu-nota:hover {
+    background: var(--cor-acento-suave);
+}
+
+.menu-nota {
+    position: absolute;
+    top: 26px;
+    right: 0;
+    z-index: 5;
+    min-width: 130px;
+    padding: 6px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    background: var(--cor-superficie);
+    box-shadow: 0 10px 24px rgba(30, 60, 140, .16);
+}
+
+.menu-nota[hidden] {
+    display: none;
+}
+
+.menu-nota button {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cor-texto-forte);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+}
+
+.menu-nota button:hover {
+    background: var(--cor-acento-suave);
+}
+
+.menu-nota .perigo {
+    color: var(--cor-vermelho);
+}
+
+.menu-nota .perigo:hover {
+    background: var(--cor-fundo);
+}
+
+
+/* =====================================================
+   AVISO — MENSAGEM FLUTUANTE
+===================================================== */
+
+.aviso-nota {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 300;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--cor-texto-forte);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(15, 31, 92, .3);
+}
+
+.aviso-nota.aviso-erro {
+    background: var(--cor-vermelho);
+}
+
+
+/* =====================================================
+   RESPONSIVO
+   Mantém a adaptação original da página
+===================================================== */
+
+@media (max-width: 1150px) {
+    .area-notas {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .frase-manuscrita {
+        display: none;
+    }
+}
+
+@media (max-width: 760px) {
+    .barra-lateral {
+        display: none;
+    }
+
+    .barra-superior {
+        padding: 0 12px;
+    }
+
+    .titulo-notas h1 {
+        font-size: 22px;
+    }
+
+    .topo-lista {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .busca-notas {
+        width: 100%;
+    }
+}

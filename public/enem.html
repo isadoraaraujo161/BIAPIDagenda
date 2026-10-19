@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <!-- Configurações da página -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIPAID - ENEM</title>
+    <script src="tema.js"></script>
+    <link rel="stylesheet" href="notificacoes.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Arquivo CSS -->
+    <link rel="stylesheet" href="enem.css">
+</head>
+
+<body>
+
+    <!-- Ícones reutilizáveis -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 14h2M14 14h2M8 18h2"/></symbol>
+        <symbol id="i-notes" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+        <symbol id="i-money" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9c-.5-1-1.5-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6v12"/></symbol>
+        <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.5 5.7 21l1.5-7L2 9.3l7-.8z"/></symbol>
+        <symbol id="i-enem" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 4L1 9l11 5 9-4.1V15h2V9zM5 13v4c0 1.5 3 3 7 3s7-1.5 7-3v-4l-7 3.2z"/></symbol>
+        <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="currentColor" stroke="none"/><path fill="currentColor" stroke="none" d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></symbol>
+        <symbol id="i-bell-o" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 19a2 2 0 0 0 4 0"/></symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></symbol>
+
+        <!-- Ícones da página ENEM -->
+        <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-2-1.500-5-2-8-1.500v13c3-.5 6 0 8 1.500 2-1.500 5-2 8-1.500v-13c-3-.5-6 0-8 1.500zM12 6v13"/></symbol>
+        <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 12h6M9 16h6"/></symbol>
+        <symbol id="i-aim" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="M12 12l8-8M16 4h4v4"/></symbol>
+        <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20l1-4L16 5l3 3L8 19zM14 7l3 3M4 22h16"/></symbol>
+        <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M8 7h8M8 12h2M12 12h2M16 12h.01M8 16h2M12 16h2M16 16h.01"/></symbol>
+        <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M5 19C5 9 11 4 20 4c0 9-5 15-15 15zM5 19l8-8"/></symbol>
+        <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+        <symbol id="i-flame" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 22c4 0 7-3 7-7 0-3-2-5-3-7-1 2-2 3-3 3 0-3-1-6-4-8 0 4-4 6-4 12 0 4 3 7 7 7z"/></symbol>
+        <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 3L3 11l7 3 3 7zM10 14l11-11"/></symbol>
+        <symbol id="i-sparkle" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2l2.600 7.400L22 12l-7.400 2.600L12 22l-2.600-7.400L2 12l7.400-2.600z"/></symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></symbol>
+    </svg>
+
+    <!-- Aplicativo -->
+    <div class="aplicativo">
+
+        <!-- MENU LATERAL -->
+        <aside class="barra-lateral">
+
+            <div class="area-logo">
+                <div class="simbolo-logo">B</div>
+                <div>
+                    <div class="texto-logo">BIPAID</div>
+                    <small class="slogan-logo">Organize sua vida</small>
+                </div>
+            </div>
+
+            <div class="subtitulo-logo">
+                Você fala.<br>
+                A BIPAID organiza.
+            </div>
+
+            <nav class="menu-lateral">
+
+                <a href="paginainicial.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-home"/></svg></span>
+                    <span class="texto-menu">Início</span>
+                </a>
+
+                <a href="agenda.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-cal"/></svg></span>
+                    <span class="texto-menu">Agenda</span>
+                </a>
+
+                <a href="nota.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-notes"/></svg></span>
+                    <span class="texto-menu">Notas</span>
+                </a>
+
+                <a href="meudinheiro.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-money"/></svg></span>
+                    <span class="texto-menu">Meu Dinheiro</span>
+                </a>
+
+                <a href="metas.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-target"/></svg></span>
+                    <span class="texto-menu">Minhas Metas</span>
+                </a>
+
+                <a href="eventos.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-star"/></svg></span>
+                    <span class="texto-menu">Eventos EPT</span>
+                </a>
+
+                <a href="semana.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-cal"/></svg></span>
+                    <span class="texto-menu">Minha Semana</span>
+                </a>
+
+                <a href="enem.html" class="link-menu ativo">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-enem"/></svg></span>
+                    <span class="texto-menu">ENEM</span>
+                </a>
+
+            </nav>
+
+            <div class="parte-inferior">
+
+                <a href="ajustes.html" class="link-menu link-configuracoes">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-gear"/></svg></span>
+                    <span class="texto-menu">Ajustes</span>
+                </a>
+
+                <!-- Perfil inferior direciona para perfil.html -->
+                <a href="perfil.html" class="perfil-usuario">
+                    <div class="avatar-usuario">US</div>
+
+                    <div class="informacoes-usuario">
+                        <strong class="nome-usuario">Usuário</strong>
+                        <span><i class="ponto-online"></i>Conta conectada</span>
+                    </div>
+
+                    <span class="seta-perfil">›</span>
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="conteudo-principal">
+
+            <!-- Barra superior -->
+            <header class="barra-superior">
+
+                <div class="caminho-pagina">
+                    <svg class="ic"><use href="#i-home"/></svg>
+                    <strong>BIPAID</strong>
+                    <em>›</em>
+                    <span>ENEM</span>
+                </div>
+
+                <div class="acoes-superiores">
+
+                    <button type="button" class="botao-notificacao" aria-label="Notificações">
+                        <svg class="ic"><use href="#i-bell-o"/></svg>
+                    </button>
+
+                    <!-- Perfil superior direciona para perfil.html -->
+                    <a href="perfil.html" class="botao-perfil">
+                        <svg class="ic"><use href="#i-user"/></svg>
+                        <span class="nome-usuario">Usuário</span>
+                        <span>></span>
+                    </a>
+
+                </div>
+
+            </header>
+
+            <div class="conteudo-enem">
+
+                <!-- Cabeçalho -->
+                <section class="cabecalho-enem">
+
+                    <div class="identidade-bipa">
+
+                        <div class="avatar-bipa">
+                            <span>B</span>
+                            <svg class="brilho brilho-um"><use href="#i-sparkle"/></svg>
+                            <svg class="brilho brilho-dois"><use href="#i-sparkle"/></svg>
+                        </div>
+
+                        <div>
+                            <span class="etiqueta-bipa">BIPA</span>
+                            <h1>Parceiro Acadêmico</h1>
+                            <p>Seu espaço para estudar, entender e se preparar para o ENEM.</p>
+                        </div>
+
+                    </div>
+
+                    <svg class="detalhe-cabecalho" viewBox="0 0 190 90" aria-hidden="true">
+                        <text x="8" y="44" class="texto-manuscrito" transform="rotate(-9 8 44)">Você consegue!</text>
+                        <path d="M148 14l16-6M156 44l14 3M10 76l8-12" fill="none" stroke="currentColor" stroke-width="2.500" stroke-linecap="round"/>
+                        <path d="M100 66c-8-6-14-12-14-18a8 8 0 0 1 14-4 8 8 0 0 1 14 4c0 6-6 12-14 18z" fill="currentColor" opacity=".18" stroke="currentColor" stroke-width="2.500" stroke-linejoin="round"/>
+                    </svg>
+
+                </section>
+
+                <!-- Área principal -->
+                <section class="area-estudo">
+
+                    <!-- Chat -->
+                    <div class="cartao-chat">
+
+                        <div class="cabecalho-chat">
+                            <div class="avatar-chat">B</div>
+
+                            <div class="info-chat">
+                                <strong>BIPA</strong>
+                                <span>Online • Pronto para ajudar!</span>
+                            </div>
+
+                            <span class="etiqueta-chat">Parceiro Acadêmico</span>
+                        </div>
+
+                        <!-- Mensagens -->
+                        <div class="mensagens" id="mensagens">
+
+                            <div class="mensagem mensagem-bipa">
+                                <div class="avatar-mensagem">B</div>
+
+                                <div class="bloco-mensagem">
+                                    <div class="conteudo-mensagem">
+                                        <strong>BIPA</strong>
+
+                                        <p>Oi! 👋 Eu sou a BIPA, sua Parceira Acadêmica.</p>
+
+                                        <p>
+                                            Pode me contar qual é sua dúvida, que eu te ajudo a entender
+                                            de um jeito mais fácil e sem complicação!
+                                        </p>
+
+                                        <p>
+                                            Você também pode escolher um dos temas abaixo para
+                                            começarmos, tá?
+                                        </p>
+                                    </div>
+
+                                    <span class="hora-mensagem" id="hora-inicial"></span>
+                                </div>
+                            </div>
+
+                            <!-- Sugestões -->
+                            <div class="sugestoes">
+
+                                <button type="button" class="sugestao" data-mensagem="Quero estudar matemática para o ENEM.">
+                                    <svg class="ic"><use href="#i-calc"/></svg>
+                                    Matemática
+                                </button>
+
+                                <button type="button" class="sugestao" data-mensagem="Quero estudar linguagens para o ENEM.">
+                                    <svg class="ic"><use href="#i-book"/></svg>
+                                    Linguagens
+                                </button>
+
+                                <button type="button" class="sugestao" data-mensagem="Quero estudar ciências da natureza para o ENEM.">
+                                    <svg class="ic"><use href="#i-leaf"/></svg>
+                                    Ciências da Natureza
+                                </button>
+
+                                <button type="button" class="sugestao" data-mensagem="Quero ajuda para estudar redação do ENEM.">
+                                    <svg class="ic"><use href="#i-pencil"/></svg>
+                                    Redação
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Área de digitação -->
+                        <div class="area-digitar">
+
+                            <div class="campo-digitar">
+                                <span class="icone-campo"><svg class="ic"><use href="#i-sparkle"/></svg></span>
+
+                                <textarea
+                                    id="campo-mensagem"
+                                    placeholder="Digite sua mensagem..."
+                                    rows="1"
+                                ></textarea>
+                            </div>
+
+                            <button id="botao-enviar" class="botao-enviar" type="button" aria-label="Enviar mensagem">
+                                <svg class="ic"><use href="#i-send"/></svg>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                    <!-- LATERAL -->
+                    <aside class="lateral-estudo">
+
+                        <!-- Atalhos rápidos -->
+                        <div class="cartao-lateral">
+
+                            <div class="titulo-lateral">
+                                <svg class="ic"><use href="#i-bolt"/></svg>
+                                <strong>Atalhos rápidos</strong>
+                            </div>
+
+                            <button type="button" class="acao-estudo" data-mensagem="Explique um assunto de forma simples.">
+                                <span class="icone-acao"><svg class="ic"><use href="#i-book"/></svg></span>
+                                <div>
+                                    <strong>Explique uma matéria</strong>
+                                    <small>Entenda o conteúdo de forma simples e direta.</small>
+                                </div>
+                                <svg class="ic seta-acao"><use href="#i-chevron"/></svg>
+                            </button>
+
+                            <button type="button" class="acao-estudo" data-mensagem="Quero resolver uma questão do ENEM com você.">
+                                <span class="icone-acao"><svg class="ic"><use href="#i-file"/></svg></span>
+                                <div>
+                                    <strong>Resolver uma questão</strong>
+                                    <small>Treine com questões do ENEM e veja a resolução.</small>
+                                </div>
+                                <svg class="ic seta-acao"><use href="#i-chevron"/></svg>
+                            </button>
+
+                            <button type="button" class="acao-estudo" data-mensagem="Quero estudar para o ENEM.">
+                                <span class="icone-acao"><svg class="ic"><use href="#i-aim"/></svg></span>
+                                <div>
+                                    <strong>Montar um estudo</strong>
+                                    <small>Organize seu plano de estudos personalizado.</small>
+                                </div>
+                                <svg class="ic seta-acao"><use href="#i-chevron"/></svg>
+                            </button>
+
+                            <button type="button" class="acao-estudo" data-mensagem="Quero melhorar minha redação do ENEM.">
+                                <span class="icone-acao"><svg class="ic"><use href="#i-pencil"/></svg></span>
+                                <div>
+                                    <strong>Melhorar minha redação</strong>
+                                    <small>Dicas, correções e exemplos para evoluir.</small>
+                                </div>
+                                <svg class="ic seta-acao"><use href="#i-chevron"/></svg>
+                            </button>
+
+                        </div>
+
+                        <!-- Tópicos mais acessados -->
+                        <div class="cartao-lateral">
+
+                            <div class="titulo-lateral">
+                                <svg class="ic"><use href="#i-flame"/></svg>
+                                <strong>Tópicos mais acessados</strong>
+                            </div>
+
+                            <div class="areas-enem">
+                                <span>Funções</span>
+                                <span>Gramática</span>
+                                <span>História</span>
+                                <span>Biologia</span>
+                                <span>Química</span>
+                                <span>Física</span>
+                            </div>
+
+                        </div>
+
+                        <!-- Motivacional -->
+                        <div class="cartao-motivacao">
+
+                            <svg class="ic icone-motivacao"><use href="#i-enem"/></svg>
+
+                            <div>
+                                <p>Você está mais perto<br><strong>do seu sonho!</strong></p>
+                                <small>A cada estudo, você se aproxima do seu futuro. Continue! <svg class="ic coracao"><use href="#i-heart"/></svg></small>
+                            </div>
+
+                            <svg class="ic brilho-motivacao brilho-m1"><use href="#i-sparkle"/></svg>
+                            <svg class="ic brilho-motivacao brilho-m2"><use href="#i-sparkle"/></svg>
+
+                        </div>
+
+                    </aside>
+
+                </section>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script src="usuario.js"></script>
+      <script>
+    mostrarUsuario();
+    </script>
+    <script src="notificacoes.js"></script>
+    <script src="aviso.js"></script>
+    <script src="enem.js"></script>
+
+</body>
+
+</html>

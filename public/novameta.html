@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIPAID - Nova Meta</title>
+    <script src="tema.js"></script>
+     <link rel="stylesheet" href="notificacoes.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="novameta.css">
+    <link rel="stylesheet" href="aviso.css">
+</head>
+
+<body>
+
+    <!-- Ícones reutilizáveis -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></symbol>
+        <symbol id="i-cal" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M8 14h2M14 14h2M8 18h2"/></symbol>
+        <symbol id="i-notes" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+        <symbol id="i-money" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9c-.5-1-1.5-1.5-2.5-1.5-1.5 0-2.5.8-2.5 2s1 1.7 2.5 2 2.5.8 2.5 2-1 2-2.5 2c-1 0-2-.5-2.5-1.5M12 6v12"/></symbol>
+        <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+        <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.5 5.7 21l1.5-7L2 9.3l7-.8z"/></symbol>
+        <symbol id="i-enem" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 4L1 9l11 5 9-4.1V15h2V9zM5 13v4c0 1.5 3 3 7 3s7-1.5 7-3v-4l-7 3.2z"/></symbol>
+        <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></symbol>
+        <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="currentColor" stroke="none"/><path fill="currentColor" stroke="none" d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></symbol>
+        <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="12" rx="3" fill="currentColor" stroke="none"/><path d="M12 4v4"/><circle cx="9" cy="14" r="1.3" fill="#fff" stroke="none"/><circle cx="15" cy="14" r="1.3" fill="#fff" stroke="none"/></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-5-8M8 12l3 3 9-10"/></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 3a6 6 0 0 0-6 6v4l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19a2 2 0 0 0 4 0z"/></symbol>
+        <symbol id="i-heart" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M12 21s-8-5.2-8-11a4.6 4.6 0 0 1 8-3 4.6 4.6 0 0 1 8 3c0 5.800-8 11-8 11z"/></symbol>
+        <symbol id="i-bell-o" viewBox="0 0 24 24"><path d="M6 9a6 6 0 0 1 12 0c0 6 2 7 2 7H4s2-1 2-7M10 19a2 2 0 0 0 4 0"/></symbol>
+        <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H4v2a4 4 0 0 0 4 4M16 6h4v2a4 4 0 0 1-4 4M12 13v4M8 21h8M10 17h4"/></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20h16M6 16l4-5 3 3 5-7M15 7h3v3"/></symbol>
+        <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7zM14 3v5h5M10 13h6M10 17h6"/></symbol>
+        <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="8" cy="8.5" r="1.3" fill="currentColor"/></symbol>
+        <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.7.6 1 1.3 1 2.1h5c0-.8.3-1.5 1-2.1A6 6 0 0 0 12 3z"/></symbol>
+        <symbol id="i-ok" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/><path d="M7.5 12.5l3 3 6-6.5" stroke="#fff" stroke-width="2.5"/></symbol>
+        <symbol id="i-car" viewBox="0 0 24 24"><path d="M5 17v-5l2-5h10l2 5v5zM5 12h14M7 17v2M17 17v2"/><circle cx="8.5" cy="14.5" r="1" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1" fill="currentColor"/></symbol>
+        <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></symbol>
+        <symbol id="i-coins" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/></symbol>
+        <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="currentColor" stroke="none"/><path d="M12 7v5l3 2" stroke="#fff"/></symbol>
+    </svg>
+
+    <div class="aplicativo">
+
+        <aside class="barra-lateral">
+
+            <div class="area-logo">
+                <div class="simbolo-logo">B</div>
+                <div>
+                    <div class="texto-logo">BIPAID</div>
+                    <small class="slogan-logo">Organize sua vida</small>
+                </div>
+            </div>
+
+            <div class="subtitulo-logo">
+                Você fala.<br>
+                A BIPAID organiza.
+            </div>
+
+            <nav class="menu-lateral">
+
+                <a href="paginainicial.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-home"/></svg></span>
+                    <span class="texto-menu">Início</span>
+                </a>
+
+                <a href="agenda.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-cal"/></svg></span>
+                    <span class="texto-menu">Agenda</span>
+                </a>
+
+                <a href="nota.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-notes"/></svg></span>
+                    <span class="texto-menu">Notas</span>
+                </a>
+
+                <a href="meudinheiro.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-money"/></svg></span>
+                    <span class="texto-menu">Meu Dinheiro</span>
+                </a>
+
+                <a href="metas.html" class="link-menu ativo">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-target"/></svg></span>
+                    <span class="texto-menu">Minhas Metas</span>
+                </a>
+
+                <a href="eventos.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-star"/></svg></span>
+                    <span class="texto-menu">Eventos EPT</span>
+                </a>
+
+                <a href="semana.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-cal"/></svg></span>
+                    <span class="texto-menu">Minha Semana</span>
+                </a>
+
+                <a href="enem.html" class="link-menu">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-enem"/></svg></span>
+                    <span class="texto-menu">ENEM</span>
+                </a>
+
+            </nav>
+
+            <div class="parte-inferior">
+
+                <a href="ajustes.html" class="link-menu link-configuracoes">
+                    <span class="icone-menu"><svg class="ic"><use href="#i-gear"/></svg></span>
+                    <span class="texto-menu">Ajustes</span>
+                </a>
+
+                <a href="perfil.html" class="perfil-usuario" aria-label="Abrir perfil do usuário" style="color: inherit; text-decoration: none;">
+
+                    <div class="avatar-usuario">US</div>
+
+                    <div class="informacoes-usuario">
+                        <strong class="nome-usuario">Usuário</strong>
+                        <span><i class="ponto-online"></i>Conta conectada</span>
+                    </div>
+
+                    <span class="seta-perfil">›</span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="conteudo-principal">
+
+            <!-- Barra superior -->
+            <header class="barra-superior">
+
+                <div class="caminho-pagina">
+                    <svg class="ic"><use href="#i-home"/></svg>
+                    <i class="divisor"></i>
+                    <strong>BIPAID</strong>
+                    <em>›</em>
+                    <a href="metas.html">Minhas Metas</a>
+                    <em>›</em>
+                    <span>Nova meta</span>
+                </div>
+
+                <div class="acoes-superiores">
+
+                    <button type="button" class="notificacao" aria-label="Notificações">
+                        <svg class="ic"><use href="#i-bell-o"/></svg>
+                    </button>
+
+                    <a href="perfil.html" class="botao-perfil" aria-label="Abrir perfil do usuário" style="color: inherit; text-decoration: none;">
+                        <svg class="ic"><use href="#i-user"/></svg>
+                        <span class="nome-usuario">Usuário</span>
+                        <span>></span>
+                    </a>
+
+                </div>
+
+            </header>
+
+            <section class="conteudo-lancamento">
+
+                <!-- Cabeçalho -->
+                <div class="cabecalho-pagina">
+
+                    <div class="icone-pagina"><svg class="ic"><use href="#i-target"/></svg></div>
+
+                    <div class="titulo-pagina">
+                        <span class="etiqueta-pagina">MINHAS METAS</span>
+                        <h1>Criar nova meta</h1>
+                        <p>Defina um objetivo e acompanhe seu progresso.</p>
+                    </div>
+
+                    <div class="frase-manuscrita" aria-hidden="true">Grandes sonhos<br>começam com<br>pequenos passos! ♡</div>
+
+                </div>
+
+                <div class="grade-lancamento">
+
+                    <!-- Formulário -->
+                    <form id="formulario-meta" class="cartao-formulario" novalidate>
+
+                        <div class="campo">
+                            <div class="icone-campo"><svg class="ic"><use href="#i-home"/></svg></div>
+                            <div class="corpo-campo">
+                                <label for="nomeMeta">Nome da meta <b>*</b></label>
+                                <input type="text" id="nomeMeta" name="nomeMeta" placeholder="Ex.: Comprar um notebook" maxlength="80" autocomplete="off">
+                            </div>
+                        </div>
+
+                        <div class="campo">
+                            <div class="icone-campo"><svg class="ic"><use href="#i-tag"/></svg></div>
+                            <div class="corpo-campo">
+                                <label for="categoriaMeta">Categoria <b>*</b></label>
+                                <select id="categoriaMeta" name="categoriaMeta">
+                                    <option value="">Selecione uma categoria</option>
+                                    <option value="financeira">Financeira</option>
+                                    <option value="academica">Acadêmica</option>
+                                    <option value="pessoal">Pessoal</option>
+                                    <option value="profissional">Profissional</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="linha-campos">
+                            <div class="campo">
+                                <div class="icone-campo"><svg class="ic"><use href="#i-target"/></svg></div>
+                                <div class="corpo-campo">
+                                    <label for="valorObjetivo">Valor objetivo <b>*</b></label>
+                                    <div class="entrada-valor"><span>R$</span><input type="number" id="valorObjetivo" name="valorObjetivo" placeholder="0,00" min="0" step="0.01" inputmode="decimal"></div>
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <div class="icone-campo"><svg class="ic"><use href="#i-coins"/></svg></div>
+                                <div class="corpo-campo">
+                                    <label for="valorAtual">Valor já alcançado</label>
+                                    <div class="entrada-valor"><span>R$</span><input type="number" id="valorAtual" name="valorAtual" placeholder="0,00" min="0" step="0.01" inputmode="decimal"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="linha-campos">
+                            <div class="campo">
+                                <div class="icone-campo"><svg class="ic"><use href="#i-cal"/></svg></div>
+                                <div class="corpo-campo">
+                                    <label for="dataLimite">Data limite <b>*</b></label>
+                                    <input type="date" id="dataLimite" name="dataLimite">
+                                </div>
+                            </div>
+                            <div class="campo">
+                                <div class="icone-campo"><svg class="ic"><use href="#i-flag"/></svg></div>
+                                <div class="corpo-campo">
+                                    <label for="prioridadeMeta">Prioridade</label>
+                                    <select id="prioridadeMeta" name="prioridadeMeta">
+                                        <option value="">Selecione a prioridade</option>
+                                        <option value="baixa">Baixa</option>
+                                        <option value="media">Média</option>
+                                        <option value="alta">Alta</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="campo">
+                            <div class="icone-campo"><svg class="ic"><use href="#i-doc"/></svg></div>
+                            <div class="corpo-campo">
+                                <label for="descricaoMeta">Descrição</label>
+                                <div class="area-descricao"><textarea id="descricaoMeta" name="descricaoMeta" placeholder="Escreva uma descrição para sua meta..." maxlength="500" rows="4"></textarea><span class="contador-descricao" id="contador-descricao">0/500</span></div>
+                            </div>
+                        </div>
+
+                        <p class="erro-formulario" id="erro-formulario" role="alert"></p>
+
+                        <div class="acoes-formulario">
+                            <a href="metas.html" class="botao-cancelar">Cancelar</a>
+                            <button type="submit" class="botao-adicionar botao-criar-meta">＋ Criar meta</button>
+                        </div>
+
+                    </form>
+
+                    <!-- Coluna lateral -->
+                    <aside class="coluna-lateral">
+
+                        <section class="cartao-dicas">
+
+                            <div class="topo-dicas">
+                                <div class="icone-topo"><svg class="ic"><use href="#i-bulb"/></svg></div>
+                                <h2>Dicas para suas metas</h2>
+                                <em>›</em>
+                            </div>
+
+                            <ul>
+                                <li><svg class="ic"><use href="#i-ok"/></svg>Seja específico(a) no nome da meta.</li>
+                                <li><svg class="ic"><use href="#i-ok"/></svg>Defina um valor realista.</li>
+                                <li><svg class="ic"><use href="#i-ok"/></svg>Escolha um prazo que te motive.</li>
+                                <li><svg class="ic"><use href="#i-ok"/></svg>Divida em pequenos passos.</li>
+                            </ul>
+
+                        </section>
+
+                        <section class="cartao-motivacao">
+
+                            <div class="texto-motivacao">
+                                <strong>Sonhe, planeje,<br>conquiste!</strong>
+                                <p>A BIPAID te ajuda a transformar seus planos em realidade.</p>
+                            </div>
+
+                            <svg class="ilustracao-carteira" viewBox="0 0 110 90" aria-hidden="true">
+                                <circle cx="52" cy="50" r="30" fill="#fff" stroke="#8fb5fb" stroke-width="7"/>
+                                <circle cx="52" cy="50" r="18" fill="none" stroke="#2f6bef" stroke-width="6"/>
+                                <circle cx="52" cy="50" r="6" fill="#1b4fc8"/>
+                                <path d="M52 50L84 18M84 18v12M84 18h12" stroke="#1b4fc8" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M96 10v8M104 22l-6 1M12 20l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" stroke="#2f6bef" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                            </svg>
+
+                        </section>
+
+                        <section class="cartao-dicas cartao-exemplo">
+
+                            <div class="topo-dicas">
+                                <div class="icone-topo claro"><svg class="ic"><use href="#i-star"/></svg></div>
+                                <h2>Exemplo de meta</h2>
+                                <em>›</em>
+                            </div>
+
+                            <div class="exemplo-meta">
+
+                                <div class="icone-exemplo"><svg class="ic"><use href="#i-car"/></svg></div>
+
+                                <div class="dados-exemplo">
+                                    <strong>Carro</strong>
+                                    <span><b>R$ 10,00</b> de R$ 10.000,00</span>
+
+                                    <div class="linha-exemplo">
+                                        <div class="barra-exemplo"><div></div></div>
+                                        <small>0%</small>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="rodape-exemplo">
+                                <span><svg class="ic"><use href="#i-cal"/></svg>Até dez/2026</span>
+                                <span><svg class="ic"><use href="#i-tag"/></svg>Pessoal</span>
+                            </div>
+
+                        </section>
+
+                    </aside>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="usuario.js"></script>
+      <script>
+    mostrarUsuario();
+    </script>
+    <script src="notificacoes.js"></script>
+    <script src="aviso.js"></script>
+    <script src="novameta.js"></script>
+
+</body>
+
+</html>
+
+
+

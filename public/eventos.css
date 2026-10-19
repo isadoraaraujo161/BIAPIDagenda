@@ -1,0 +1,882 @@
+
+/* =====================================================
+   EVENTOS EPT - BIPAID
+   Suporte aos temas e à acessibilidade
+===================================================== */
+
+:root {
+    --cor-fundo: #f3f6fd;
+    --cor-superficie: #ffffff;
+    --cor-texto: #1b2a5e;
+    --cor-texto-forte: #0f1f5c;
+    --cor-suave: #5b6892;
+    --cor-borda: #e3e9f7;
+    --cor-acento: #1553f0;
+    --cor-acento-suave: #e9f0ff;
+    --cor-acento-texto: #ffffff;
+
+    --azul: var(--cor-acento);
+    --marinho: var(--cor-texto-forte);
+    --texto: var(--cor-texto);
+    --suave: var(--cor-suave);
+    --fundo: var(--cor-fundo);
+    --linha: var(--cor-borda);
+    --claro: var(--cor-acento-suave);
+
+    --vermelho: #e8455f;
+    --laranja: #f5a524;
+    --verde: #22a06b;
+    --roxo: #5b3fd6;
+
+    --escala-fonte: 1;
+    --alvo-toque-min: 40px;
+}
+
+/* =====================================================
+   TEMAS
+===================================================== */
+
+/* Tema escuro */
+[data-tema="escuro"] {
+    --cor-fundo: #101522;
+    --cor-superficie: #191f2e;
+    --cor-texto: #e1e7f5;
+    --cor-texto-forte: #f4f6ff;
+    --cor-suave: #a9b5cf;
+    --cor-borda: #343e55;
+    --cor-acento: #78a0ff;
+    --cor-acento-suave: #263654;
+    --cor-acento-texto: #101522;
+}
+
+/* Tema roxo */
+[data-tema="roxo"] {
+    --cor-fundo: #f7f4ff;
+    --cor-superficie: #ffffff;
+    --cor-texto: #332653;
+    --cor-texto-forte: #251342;
+    --cor-suave: #75678e;
+    --cor-borda: #e7def8;
+    --cor-acento: #7047d7;
+    --cor-acento-suave: #eee7ff;
+    --cor-acento-texto: #ffffff;
+}
+
+/* Tema verde */
+[data-tema="verde"] {
+    --cor-fundo: #f1faf5;
+    --cor-superficie: #ffffff;
+    --cor-texto: #204b39;
+    --cor-texto-forte: #123b29;
+    --cor-suave: #5d806d;
+    --cor-borda: #d7ecdf;
+    --cor-acento: #198754;
+    --cor-acento-suave: #ddf5e7;
+    --cor-acento-texto: #ffffff;
+}
+
+/* Tema rosa */
+[data-tema="rosa"] {
+    --cor-fundo: #fff4f8;
+    --cor-superficie: #ffffff;
+    --cor-texto: #66354c;
+    --cor-texto-forte: #4b2036;
+    --cor-suave: #956b80;
+    --cor-borda: #f3dce7;
+    --cor-acento: #cf4e87;
+    --cor-acento-suave: #ffe2ef;
+    --cor-acento-texto: #ffffff;
+}
+
+/* Tema azul */
+[data-tema="azul"] {
+    --cor-fundo: #eff7ff;
+    --cor-superficie: #ffffff;
+    --cor-texto: #234665;
+    --cor-texto-forte: #143554;
+    --cor-suave: #64829d;
+    --cor-borda: #d7e9f8;
+    --cor-acento: #2176d2;
+    --cor-acento-suave: #dceeff;
+    --cor-acento-texto: #ffffff;
+}
+
+/* =====================================================
+   CONFIGURAÇÕES GERAIS
+===================================================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: calc(16px * var(--escala-fonte, 1));
+}
+
+body {
+    font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    transition: background-color 0.2s, color 0.2s;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.ic {
+    width: 19.5px;
+    height: 19.5px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+}
+
+.aplicativo {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =====================================================
+   MENU LATERAL
+===================================================== */
+
+.barra-lateral {
+    width: 234px;
+    background: var(--cor-superficie);
+    border-right: 1px solid var(--linha);
+    padding: 13.5px 13.5px 18px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.area-logo {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.simbolo-logo {
+    width: 52.5px;
+    height: 49.5px;
+    border-radius: 13.5px;
+    background: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    color: #ffffff;
+    font-size: 31.5px;
+    font-weight: 800;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4.5px 10.5px rgba(21, 83, 240, 0.3);
+}
+
+.texto-logo {
+    font-size: 25.5px;
+    font-weight: 800;
+    color: var(--cor-texto-forte);
+    line-height: 1;
+}
+
+.slogan-logo {
+    font-size: 11.2px;
+    color: var(--suave);
+}
+
+.subtitulo-logo {
+    margin: 13.5px 0 10.5px;
+    font-size: 12px;
+    line-height: 1.3;
+    font-weight: 500;
+    color: var(--texto);
+}
+
+.menu-lateral {
+    display: flex;
+    flex-direction: column;
+}
+
+.link-menu {
+    display: flex;
+    align-items: center;
+    gap: 13.5px;
+    padding: 0 13.5px;
+    height: 39.8px;
+    margin: 3px 0;
+    border-radius: 9px;
+    font-weight: 600;
+    font-size: 14.2px;
+    color: var(--texto);
+    transition: background 0.15s, color 0.15s;
+}
+
+.link-menu:hover {
+    background: var(--claro);
+}
+
+.icone-menu {
+    display: grid;
+    place-items: center;
+    color: var(--azul);
+}
+
+.link-menu.ativo {
+    background: var(--claro);
+    color: var(--azul);
+    font-weight: 700;
+    box-shadow: inset 3px 0 0 var(--azul);
+}
+
+.parte-inferior {
+    margin-top: auto;
+    border-top: 1px solid var(--linha);
+    padding-top: 10.5px;
+}
+
+.perfil-usuario {
+    margin-top: 10.5px;
+    background: var(--claro);
+    border-radius: 12px;
+    padding: 9px 10.5px;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+}
+
+.avatar-usuario {
+    width: 46.5px;
+    height: 46.5px;
+    border-radius: 50%;
+    background-image: linear-gradient(135deg, #1a5cff, #0b3fd1);
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 15px;
+    display: grid;
+    place-items: center;
+    border: 3px solid #cfe0ff;
+    flex-shrink: 0;
+}
+
+.avatar-usuario.com-foto {
+    color: transparent;
+}
+
+.informacoes-usuario strong {
+    display: block;
+    color: var(--azul);
+    font-size: 12.8px;
+}
+
+.informacoes-usuario span {
+    font-size: 11px;
+    color: var(--suave);
+    display: flex;
+    align-items: center;
+    gap: 4.5px;
+}
+
+.ponto-online {
+    width: 7.5px;
+    height: 7.5px;
+    border-radius: 50%;
+    background: var(--verde);
+    display: inline-block;
+}
+
+.seta-perfil {
+    margin-left: auto;
+    color: var(--azul);
+    font-size: 19.5px;
+}
+
+/* =====================================================
+   TOPO
+===================================================== */
+
+.conteudo-principal {
+    flex: 1;
+    min-width: 0;
+}
+
+.barra-superior {
+    height: 61.5px;
+    background: var(--cor-superficie);
+    border-bottom: 1px solid var(--linha);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 13.5px 0 21px;
+}
+
+.caminho-pagina {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-size: 14.2px;
+    font-weight: 600;
+    color: var(--marinho);
+}
+
+.caminho-pagina .ic {
+    color: var(--azul);
+}
+
+.caminho-pagina em {
+    font-style: normal;
+    color: var(--suave);
+    font-weight: 400;
+}
+
+.caminho-pagina strong {
+    color: var(--azul);
+    font-weight: 600;
+}
+
+.caminho-pagina span {
+    color: var(--suave);
+    font-weight: 500;
+}
+
+.acoes-superiores {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.botao-perfil {
+    border: 0;
+    font: inherit;
+    cursor: pointer;
+    background: var(--azul);
+    color: var(--cor-acento-texto);
+    border-radius: 10.5px;
+    height: 39.8px;
+    padding: 0 16.5px;
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    font-weight: 700;
+    font-size: 13.5px;
+    box-shadow: 0 4.5px 10.5px rgba(21, 83, 240, 0.15);
+}
+
+.botao-perfil .ic {
+    width: 16.5px;
+    height: 16.5px;
+}
+.notificacao {
+    width: 39.8px;
+    height: 39.8px;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10.5px;
+    background: var(--cor-superficie);
+    color: var(--cor-suave);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, border-color .2s, color .2s;
+}
+
+.notificacao:hover {
+    background: var(--cor-fundo);
+    color: var(--cor-texto-forte);
+}
+
+.notificacao .ic {
+    width: 18px;
+    height: 18px;
+}
+
+/* =====================================================
+   EVENTOS EPT
+===================================================== */
+
+.conteudo-eventos {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px 22px 32px 24px;
+}
+
+/* Título */
+
+.cabecalho-eventos h1 {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--marinho);
+}
+
+.cabecalho-eventos p {
+    margin-top: 2px;
+    font-size: 15px;
+    color: var(--texto);
+}
+
+/* =====================================================
+   FILTROS
+===================================================== */
+
+.filtros-eventos {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(0, 1.1fr)
+        minmax(0, 1.9fr);
+    gap: 14px;
+}
+
+.filtro {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--linha);
+    border-radius: 12px;
+    background: var(--cor-superficie);
+    color: var(--azul);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.filtro:focus-within {
+    border-color: var(--azul);
+    box-shadow: 0 0 0 3px var(--claro);
+}
+
+.filtro .ic {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.filtro select,
+.filtro input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font: inherit;
+    font-size: 13px;
+    color: var(--texto);
+}
+
+.filtro select {
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+    padding-right: 22px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%235b6892' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+
+.filtro select option {
+    background: var(--cor-superficie);
+    color: var(--texto);
+}
+
+.filtro input::placeholder {
+    color: var(--suave);
+    opacity: 0.85;
+}
+
+/* =====================================================
+   LISTA DE EVENTOS
+===================================================== */
+
+.lista-eventos {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-evento {
+    display: grid;
+    grid-template-columns: 84px minmax(0, 1fr);
+    gap: 20px;
+    padding: 18px 20px 18px 18px;
+    border: 1px solid var(--linha);
+    border-radius: 20px;
+    background: var(--cor-superficie);
+    box-shadow: 0 4px 14px rgba(30, 60, 140, 0.05);
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.icone-evento {
+    width: 84px;
+    height: 84px;
+    border-radius: 20px;
+    background: var(--claro);
+    color: var(--azul);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+.icone-evento .ic {
+    width: 38px;
+    height: 38px;
+}
+
+.icone-evento small {
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.corpo-evento {
+    min-width: 0;
+}
+
+.corpo-evento h2 {
+    max-width: 640px;
+    font-size: 21px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--marinho);
+}
+
+.barra-informacoes {
+    display: flex;
+    align-items: center;
+    margin-top: 14px;
+    padding: 14px 8px;
+    border-radius: 14px;
+    background: var(--claro);
+}
+
+.informacao {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 16px;
+    color: var(--texto);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.informacao + .informacao {
+    border-left: 1px solid var(--linha);
+}
+
+.informacao .ic {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    color: var(--azul);
+}
+
+.informacao span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* =====================================================
+   RODAPÉ DO EVENTO
+===================================================== */
+
+.rodape-evento {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 16px;
+}
+
+.referencia-evento {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--azul);
+}
+
+.referencia-evento:hover {
+    text-decoration: underline;
+}
+
+.botao-agenda {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    height: 42px;
+    padding: 0 24px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--azul);
+    color: var(--cor-acento-texto);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(21, 83, 240, 0.15);
+    transition: background 0.15s, transform 0.15s;
+}
+
+.botao-agenda:hover {
+    filter: brightness(0.92);
+}
+
+.botao-agenda:active {
+    transform: scale(0.98);
+}
+
+.botao-agenda.evento-adicionado,
+.botao-agenda:disabled {
+    background: #d3f4e3;
+    color: #137a4f;
+    box-shadow: none;
+    cursor: default;
+}
+
+/* =====================================================
+   ESTADO VAZIO
+===================================================== */
+
+.sem-eventos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 36px 16px;
+    border: 1px dashed var(--linha);
+    border-radius: 20px;
+    background: var(--cor-superficie);
+    text-align: center;
+}
+
+.icone-sem-eventos {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--claro);
+    color: var(--azul);
+    display: grid;
+    place-items: center;
+    margin-bottom: 4px;
+}
+
+.icone-sem-eventos .ic {
+    width: 24px;
+    height: 24px;
+}
+
+.sem-eventos strong {
+    font-size: 15px;
+    color: var(--marinho);
+}
+
+.sem-eventos span {
+    font-size: 13px;
+    color: var(--suave);
+}
+
+/* =====================================================
+   AVISOS
+===================================================== */
+
+.aviso-evento {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 300;
+    max-width: 340px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    background: var(--marinho);
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 10px 24px rgba(15, 31, 92, 0.3);
+}
+
+.aviso-evento.aviso-erro {
+    background: #d12a48;
+}
+
+/* =====================================================
+   CONTRASTE ALTO
+===================================================== */
+
+[data-contraste="alto"] {
+    --cor-borda: currentColor;
+}
+
+[data-contraste="alto"] body {
+    --cor-texto: #000000;
+    --cor-texto-forte: #000000;
+    --cor-suave: #000000;
+}
+
+[data-tema="escuro"][data-contraste="alto"] body {
+    --cor-texto: #ffffff;
+    --cor-texto-forte: #ffffff;
+    --cor-suave: #ffffff;
+}
+
+[data-contraste="alto"] .barra-lateral,
+[data-contraste="alto"] .barra-superior,
+[data-contraste="alto"] .filtro,
+[data-contraste="alto"] .card-evento,
+[data-contraste="alto"] .sem-eventos {
+    border-width: 2px;
+}
+
+[data-contraste="alto"] .cabecalho-eventos h1,
+[data-contraste="alto"] .corpo-evento h2,
+[data-contraste="alto"] .sem-eventos strong {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+}
+
+/* =====================================================
+   ÁREA DE TOQUE MAIOR
+===================================================== */
+
+[data-area-toque="grande"] .link-menu,
+[data-area-toque="grande"] .botao-perfil,
+[data-area-toque="grande"] .notificacao,
+[data-area-toque="grande"] .botao-agenda {
+    min-height: var(--alvo-toque-min);
+}
+
+[data-area-toque="grande"] .filtro {
+    min-height: var(--alvo-toque-min);
+}
+
+/* =====================================================
+   RESPONSIVIDADE
+===================================================== */
+
+@media (max-width: 1000px) {
+    .filtros-eventos {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    }
+
+    .filtro.busca {
+        grid-column: 1 / -1;
+    }
+
+    .barra-informacoes {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+
+    .informacao + .informacao {
+        border-left: 0;
+    }
+}
+
+@media (max-width: 760px) {
+    .barra-lateral {
+        display: none;
+    }
+
+    .barra-superior {
+        padding: 0 12px;
+    }
+
+    .filtros-eventos {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .filtro.busca {
+        grid-column: auto;
+    }
+
+    .conteudo-eventos {
+        padding: 18px 14px 28px;
+    }
+
+    .card-evento {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+        padding: 16px;
+    }
+
+    .icone-evento {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+    }
+
+    .icone-evento .ic {
+        width: 28px;
+        height: 28px;
+    }
+
+    .cabecalho-eventos h1 {
+        font-size: 24px;
+    }
+
+    .corpo-evento h2 {
+        font-size: 19px;
+    }
+
+    .rodape-evento {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .botao-agenda {
+        justify-content: center;
+    }
+
+    .barra-informacoes {
+        padding: 12px 4px;
+    }
+
+    .informacao {
+        padding: 4px 8px;
+    }
+
+    .aviso-evento {
+        right: 12px;
+        bottom: 12px;
+        left: 12px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .caminho-pagina {
+        gap: 6px;
+        font-size: 12px;
+    }
+
+    .botao-perfil {
+        padding: 0 10px;
+        font-size: 12px;
+    }
+
+    .cabecalho-eventos h1 {
+        font-size: 22px;
+    }
+
+    .conteudo-eventos {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+

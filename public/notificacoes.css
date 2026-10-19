@@ -1,0 +1,219 @@
+/* =====================================================
+   NOTIFICAÇÕES - BIPAID
+   Painel que abre ao clicar no sininho da barra superior
+   ===================================================== */
+
+.notificacao {
+    position: relative;
+}
+
+.contador-notificacoes {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: var(--cor-vermelho, #e8455f);
+    color: #ffffff;
+    font-size: 10.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--cor-superficie);
+}
+
+.contador-notificacoes.escondido {
+    display: none;
+}
+
+.painel-notificacoes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 360px;
+    max-width: calc(100vw - 24px);
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    border-radius: 16px;
+    box-shadow: 0 16px 40px rgba(20, 30, 60, .18);
+    z-index: 2000;
+
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+}
+
+.painel-notificacoes.aberto {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.cabecalho-notificacoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.cabecalho-notificacoes strong {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14.5px;
+    color: var(--cor-texto-forte);
+}
+
+.cabecalho-notificacoes strong .ic {
+    width: 18px;
+    height: 18px;
+    color: var(--cor-acento);
+}
+
+.botao-marcar-lidas {
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cor-acento);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.botao-marcar-lidas:hover {
+    text-decoration: underline;
+}
+
+.lista-notificacoes {
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+.item-notificacao {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--cor-borda);
+    cursor: pointer;
+    transition: background .15s;
+}
+
+.item-notificacao:last-child {
+    border-bottom: 0;
+}
+
+.item-notificacao:hover {
+    background: var(--cor-fundo);
+}
+
+.item-notificacao.lida {
+    opacity: .62;
+}
+
+.icone-notificacao {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icone-notificacao .ic {
+    width: 17px;
+    height: 17px;
+}
+
+.icone-notificacao.tarefa { background: #dcf6e8; color: #16a764; }
+.icone-notificacao.meta { background: #eee8ff; color: #7c4dea; }
+.icone-notificacao.evento { background: #e5efff; color: #2868ef; }
+.icone-notificacao.financeiro-entrada { background: #dcf6e8; color: #16a764; }
+.icone-notificacao.financeiro-saida { background: #fde3d6; color: #e08a2c; }
+.icone-notificacao.nota { background: #ffe0ea; color: #d94f82; }
+
+.corpo-notificacao {
+    flex: 1;
+    min-width: 0;
+}
+
+.topo-item-notificacao {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.titulo-notificacao {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--cor-texto-forte);
+}
+
+.tempo-notificacao {
+    flex-shrink: 0;
+    font-size: 11px;
+    color: var(--cor-suave);
+}
+
+.descricao-notificacao {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--cor-suave);
+    line-height: 1.35;
+}
+
+.ponto-nao-lida {
+    position: absolute;
+    top: 16px;
+    right: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--cor-acento);
+}
+
+.sem-notificacoes {
+    padding: 28px 16px;
+    text-align: center;
+    font-size: 13px;
+    color: var(--cor-suave);
+}
+
+.rodape-notificacoes {
+    padding: 11px 16px;
+    text-align: center;
+    border-top: 1px solid var(--cor-borda);
+}
+
+.rodape-notificacoes button {
+    border: 0;
+    background: none;
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--cor-acento);
+    cursor: pointer;
+}
+
+.rodape-notificacoes button:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+
+    .painel-notificacoes {
+        width: calc(100vw - 24px);
+        right: 12px !important;
+        left: auto !important;
+    }
+}
