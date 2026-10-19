@@ -1,10 +1,5 @@
-
 let tarefas = [];
-// Sempre no dia 1, para não "pular" mês ao navegar (ex.: 31 de outubro -> novembro)
-let dataMesAtual = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
-
-// Dia exibido na visão "Dia" (começa em hoje)
-let dataDiaAtual = new Date();
+let dataMesAtual = new Date();
 
 const tarefasHoje = document.getElementById("tarefas-hoje");
 const calendarioSemana = document.getElementById("calendario-semana");
@@ -30,92 +25,16 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     configurarNavegacao();
     configurarBotoesMes();
-    configurarBotoesDia();
-    configurarBotoesSemana();
     configurarLinks();
     criarModais();
     carregarTarefas();
+    carregarResumoFinanceiro();
+    carregarResumoMetas();
 
 });
 
 
-/* USUÁRIO */
-
-async function mostrarUsuario() {
-
-    try {
-
-        const resposta = await fetch("/api/usuario-atual");
-
-        if (!resposta.ok) {
-            // Ninguém logado: volta para a tela de login
-            window.location.href = "login.html";
-            return false;
-        }
-
-        const dados = await resposta.json();
-        const usuario = dados.usuario;
-
-        if (!usuario || !usuario.nome) {
-            window.location.href = "login.html";
-            return false;
-        }
-
-        document.querySelectorAll(".nome-usuario").forEach(function (elemento) {
-            elemento.textContent = usuario.nome;
-        });
-
-        const avatar = document.querySelector(".avatar-usuario");
-
-        if (avatar) {
-
-            const partes = usuario.nome
-                .trim()
-                .split(/\s+/);
-
-            let iniciais;
-
-            if (partes.length === 1) {
-                iniciais = partes[0].substring(0, 2);
-            } else {
-                iniciais =
-                    partes[0][0] +
-                    partes[partes.length - 1][0];
-            }
-
-            avatar.textContent = iniciais.toUpperCase();
-        }
-
-        return true;
-
-    } catch (erro) {
-
-        console.error(erro);
-        window.location.href = "login.html";
-        return false;
-
-    }
-}
-
-
-/* SAIR */
-
-async function sair() {
-
-    try {
-
-        await fetch("/api/logout", { method: "POST" });
-
-    } catch (erro) {
-
-        console.error(erro);
-
-    } finally {
-
-        window.location.href = "login.html";
-
-    }
-}
+/* USUÁRIO (mostrarUsuario e sair vêm de usuario.js, carregado antes deste arquivo) */
 
 
 /* CARREGAR TAREFAS */
@@ -166,12 +85,6 @@ function configurarNavegacao() {
 
     function mostrarSecao(id) {
 
-        const cabecalho = document.querySelector(".cabecalho-pagina");
-
-        if (cabecalho) {
-            cabecalho.classList.toggle("modo-dia", id === "dia");
-        }
-
         secoes.forEach(function (secao) {
             secao.classList.remove("ativa");
         });
@@ -181,7 +94,7 @@ function configurarNavegacao() {
         });
 
         const secao = document.getElementById(id);
-        const botao = document.querySelector(`.botao-visualizacao[href="#${id}"]`);
+        const botao = document.querySelector(`[href="#${id}"]`);
 
         if (secao) {
             secao.classList.add("ativa");
@@ -236,100 +149,27 @@ function configurarNavegacao() {
 
 /* DIA */
 
-function configurarBotoesDia() {
-
-    const anterior = document.getElementById("dia-anterior");
-    const proximo = document.getElementById("dia-proximo");
-
-    function mudarDia(quantidade) {
-
-        dataDiaAtual = new Date(
-            dataDiaAtual.getFullYear(),
-            dataDiaAtual.getMonth(),
-            dataDiaAtual.getDate() + quantidade
-        );
-
-        mostrarDia();
-    }
-
-    if (anterior) {
-        anterior.addEventListener("click", function () {
-            mudarDia(-1);
-        });
-    }
-
-    if (proximo) {
-        proximo.addEventListener("click", function () {
-            mudarDia(1);
-        });
-    }
-}
-
-
 function mostrarDia() {
 
     if (!tarefasHoje) {
         return;
     }
 
-    const dataFormatada = formatarData(dataDiaAtual);
-    const ehHoje = dataFormatada === formatarData(new Date());
+    tarefasHoje.innerHTML = "";
 
-    const tituloDia = document.getElementById("titulo-dia");
-    const resumoDia = document.getElementById("resumo-dia");
+    const hoje = formatarData(new Date());
 
     const tarefasDoDia = tarefas
         .filter(function (tarefa) {
-            return tarefa.data === dataFormatada;
+            return tarefa.data === hoje;
         })
         .sort(ordenarPorHorario);
-
-    if (tituloDia) {
-
-        if (ehHoje) {
-
-            tituloDia.textContent = "Hoje, " +
-                dataDiaAtual.toLocaleDateString("pt-BR", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                });
-
-        } else {
-
-            const texto = dataDiaAtual.toLocaleDateString("pt-BR", {
-                weekday: "long",
-                day: "numeric",
-                month: "long",
-                year: "numeric"
-            });
-
-            tituloDia.textContent =
-                texto.charAt(0).toUpperCase() + texto.slice(1);
-        }
-    }
-
-    if (resumoDia) {
-
-        const total = tarefasDoDia.length;
-
-        const concluidas = tarefasDoDia.filter(function (tarefa) {
-            return tarefa.concluida;
-        }).length;
-
-        resumoDia.textContent = total === 0
-            ? "Nenhuma tarefa"
-            : `${total} ${total === 1 ? "tarefa" : "tarefas"} • ` +
-              `${concluidas} ${concluidas === 1 ? "concluída" : "concluídas"}`;
-    }
-
-    tarefasHoje.innerHTML = "";
 
     if (tarefasDoDia.length === 0) {
 
         tarefasHoje.innerHTML = `
             <p class="sem-tarefas">
-                ${ehHoje ? "Nenhuma tarefa para hoje." : "Nenhuma tarefa neste dia."}
+                Nenhuma tarefa para hoje.
             </p>
         `;
 
@@ -356,67 +196,41 @@ function criarTarefa(tarefa) {
         elemento.classList.add("tarefa-concluida");
     }
 
-    const horario = tarefa.horario || "—";
-
-    const chaveCategoria = (tarefa.categoria || "outros")
-        .toLowerCase()
-        .replace(/[^a-z]/g, "");
-
-    const categoria = formatarCategoria(chaveCategoria);
-
+    const horario = tarefa.horario || "Sem horário";
+    const categoria = formatarCategoria(tarefa.categoria);
     const prioridade = (
         tarefa.prioridade || "normal"
     ).toLowerCase();
-
-    const descricao = tarefa.descricao
-        ? `<span>${escaparHTML(tarefa.descricao)}</span>`
-        : "";
-
-    const acao = tarefa.concluida
-        ? "Desmarcar tarefa"
-        : "Concluir tarefa";
 
     elemento.innerHTML = `
         <button
             type="button"
             class="marcador"
-            title="${acao}"
-            aria-label="${acao}">
+            title="${tarefa.concluida
+                ? "Desmarcar tarefa"
+                : "Concluir tarefa"}">
         </button>
 
-        <span class="hora-tarefa">${escaparHTML(horario)}</span>
-
         <div class="informacoes-tarefa">
-            <strong>${escaparHTML(tarefa.titulo)}</strong>
-            ${descricao}
-        </div>
+            <strong>
+                ${escaparHTML(tarefa.titulo)}
+            </strong>
 
-        <span class="categoria-tarefa cat-${chaveCategoria}">
-            ${categoria}
-        </span>
+            <span>
+                ${horario} · ${categoria}
+            </span>
+        </div>
 
         <span class="prioridade ${prioridade}">
             ${formatarPrioridade(prioridade)}
         </span>
-
-        <button
-            type="button"
-            class="menu-tarefa"
-            title="Editar tarefa"
-            aria-label="Editar tarefa">⋮</button>
     `;
 
-    elemento
-        .querySelector(".marcador")
-        .addEventListener("click", function () {
-            alternarConclusao(tarefa.id);
-        });
+    const marcador = elemento.querySelector(".marcador");
 
-    elemento
-        .querySelector(".menu-tarefa")
-        .addEventListener("click", function () {
-            abrirModalEditar(tarefa);
-        });
+    marcador.addEventListener("click", function () {
+        alternarConclusao(tarefa.id);
+    });
 
     return elemento;
 }
@@ -473,148 +287,6 @@ async function alternarConclusao(id) {
 
 /* SEMANA */
 
-// 0 = semana atual, -1 = anterior, 1 = próxima...
-let deslocamentoSemana = 0;
-
-function obterInicioSemana() {
-
-    const hoje = new Date();
-
-    // A semana começa na segunda-feira
-    const diaDaSemana = (hoje.getDay() + 6) % 7;
-
-    return new Date(
-        hoje.getFullYear(),
-        hoje.getMonth(),
-        hoje.getDate() - diaDaSemana + deslocamentoSemana * 7
-    );
-}
-
-
-function formatarIntervaloSemana(inicio, fim) {
-
-    const dois = function (numero) {
-        return String(numero).padStart(2, "0");
-    };
-
-    const mesInicio = inicio.toLocaleDateString("pt-BR", { month: "long" });
-    const mesFim = fim.toLocaleDateString("pt-BR", { month: "long" });
-
-    if (inicio.getFullYear() !== fim.getFullYear()) {
-        return `${dois(inicio.getDate())} de ${mesInicio} de ${inicio.getFullYear()} – ` +
-               `${dois(fim.getDate())} de ${mesFim} de ${fim.getFullYear()}`;
-    }
-
-    if (inicio.getMonth() !== fim.getMonth()) {
-        return `${dois(inicio.getDate())} de ${mesInicio} – ` +
-               `${dois(fim.getDate())} de ${mesFim} de ${fim.getFullYear()}`;
-    }
-
-    return `${dois(inicio.getDate())} – ${dois(fim.getDate())} de ${mesFim} de ${fim.getFullYear()}`;
-}
-
-
-function configurarBotoesSemana() {
-
-    document.querySelectorAll("[data-semana]").forEach(function (botao) {
-
-        botao.addEventListener("click", function () {
-
-            const valor = botao.getAttribute("data-semana");
-
-            if (valor === "atual") {
-                deslocamentoSemana = 0;
-            } else {
-                deslocamentoSemana += Number(valor);
-            }
-
-            mostrarSemana();
-        });
-    });
-}
-
-
-function criarTarefaSemana(tarefa) {
-
-    const item = document.createElement("div");
-
-    const chaveCategoria = (tarefa.categoria || "outros")
-        .toLowerCase()
-        .replace(/[^a-z]/g, "");
-
-    item.className = `tarefa-semana tsc-${chaveCategoria}`;
-
-    if (tarefa.concluida) {
-        item.classList.add("tarefa-semana-concluida");
-    }
-
-    const acao = tarefa.concluida
-        ? "Desmarcar tarefa"
-        : "Concluir tarefa";
-
-    item.innerHTML = `
-        <div class="topo-tarefa-semana">
-            <button type="button" class="radio-tarefa" title="${acao}" aria-label="${acao}"></button>
-            <span class="hora-semana">${escaparHTML(tarefa.horario || "—")}</span>
-            <button type="button" class="menu-tarefa-semana" title="Editar tarefa" aria-label="Editar tarefa">⋮</button>
-        </div>
-
-        <strong>${escaparHTML(tarefa.titulo)}</strong>
-
-        <span class="categoria-mini">${formatarCategoria(chaveCategoria)}</span>
-    `;
-
-    item.querySelector(".radio-tarefa")
-        .addEventListener("click", function () {
-            alternarConclusao(tarefa.id);
-        });
-
-    item.querySelector(".menu-tarefa-semana")
-        .addEventListener("click", function () {
-            abrirModalEditar(tarefa);
-        });
-
-    return item;
-}
-
-
-function criarVazioSemana(data, ehHoje) {
-
-    const area = document.createElement("div");
-
-    area.className = "vazio-semana";
-
-    const diaDaSemana = data.getDay();
-
-    if (diaDaSemana === 6) {
-
-        area.innerHTML = `
-            <svg class="ic"><use href="#i-cal"/></svg>
-            <span>Aproveite o dia!</span>
-            <span class="emoji">☀️</span>
-        `;
-
-    } else if (diaDaSemana === 0) {
-
-        area.innerHTML = `
-            <svg class="ic"><use href="#i-cal"/></svg>
-            <span>Descanse também é produtivo!</span>
-            <span class="emoji rosa">♥</span>
-        `;
-
-    } else {
-
-        area.innerHTML = `
-            <svg class="ic"><use href="#i-cal"/></svg>
-            <span>Que tal adicionar uma tarefa ${ehHoje ? "de hoje" : "para este dia"}?</span>
-            <a href="agendatarefa.html">+ Nova tarefa</a>
-        `;
-    }
-
-    return area;
-}
-
-
 function mostrarSemana() {
 
     if (!calendarioSemana) {
@@ -623,68 +295,41 @@ function mostrarSemana() {
 
     calendarioSemana.innerHTML = "";
 
-    const inicioSemana = obterInicioSemana();
+    const hoje = new Date();
+    const inicioSemana = new Date(hoje);
 
-    const fimSemana = new Date(
-        inicioSemana.getFullYear(),
-        inicioSemana.getMonth(),
-        inicioSemana.getDate() + 6
+    inicioSemana.setDate(
+        hoje.getDate() - hoje.getDay()
     );
 
-    const rotulo = formatarIntervaloSemana(inicioSemana, fimSemana);
-
-    document.querySelectorAll(".rotulo-semana").forEach(function (elemento) {
-        elemento.textContent = rotulo;
-    });
-
-    const hojeFormatado = formatarData(new Date());
-
-    const nomesDias = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
-
-    const nomesCompletos = [
-        "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
-        "Quinta-feira", "Sexta-feira", "Sábado"
+    const nomesDias = [
+        "DOM",
+        "SEG",
+        "TER",
+        "QUA",
+        "QUI",
+        "SEX",
+        "SÁB"
     ];
-
-    const tarefasDaSemana = [];
-
-    let maisProdutiva = { total: 0, dia: null };
 
     for (let i = 0; i < 7; i++) {
 
-        const data = new Date(
-            inicioSemana.getFullYear(),
-            inicioSemana.getMonth(),
+        const data = new Date(inicioSemana);
+
+        data.setDate(
             inicioSemana.getDate() + i
         );
 
         const dataFormatada = formatarData(data);
-        const ehHoje = dataFormatada === hojeFormatado;
-
-        const tarefasDoDia = tarefas
-            .filter(function (tarefa) {
-                return tarefa.data === dataFormatada;
-            })
-            .sort(ordenarPorHorario);
-
-        tarefasDaSemana.push(...tarefasDoDia);
-
-        if (tarefasDoDia.length > maisProdutiva.total) {
-            maisProdutiva = { total: tarefasDoDia.length, dia: data };
-        }
-
-        const total = tarefasDoDia.length;
-
-        // Dia sem tarefas: não mostra contagem (a mensagem já aparece no quadro)
-        const resumo = total === 0
-            ? ""
-            : `${total} ${total === 1 ? "tarefa" : "tarefas"}`;
 
         const coluna = document.createElement("div");
 
         coluna.className = "dia-semana";
 
-        if (ehHoje) {
+        if (
+            dataFormatada ===
+            formatarData(hoje)
+        ) {
             coluna.classList.add("dia-atual");
         }
 
@@ -692,65 +337,59 @@ function mostrarSemana() {
             <div class="cabecalho-dia-semana">
                 <span>${nomesDias[i]}</span>
                 <strong>${data.getDate()}</strong>
-                <small>${resumo}</small>
             </div>
 
             <div class="tarefas-dia"></div>
         `;
 
-        const areaTarefas = coluna.querySelector(".tarefas-dia");
+        const areaTarefas =
+            coluna.querySelector(".tarefas-dia");
 
-        if (total === 0) {
+        const tarefasDoDia = tarefas
+            .filter(function (tarefa) {
+                return tarefa.data === dataFormatada;
+            })
+            .sort(ordenarPorHorario);
 
-            areaTarefas.appendChild(criarVazioSemana(data, ehHoje));
+        if (tarefasDoDia.length === 0) {
+
+            areaTarefas.innerHTML = `
+                <span style="color:#52647c;font-size:8px;">
+                    Nenhuma tarefa
+                </span>
+            `;
 
         } else {
 
             tarefasDoDia.forEach(function (tarefa) {
-                areaTarefas.appendChild(criarTarefaSemana(tarefa));
+
+                const item =
+                    document.createElement("div");
+
+                item.className = "tarefa-semana";
+
+                item.innerHTML = `
+                    <strong>
+                        ${escaparHTML(tarefa.titulo)}
+                    </strong>
+
+                    ${
+                        tarefa.horario
+                            ? `<br><small>${tarefa.horario}</small>`
+                            : ""
+                    }
+                `;
+
+                areaTarefas.appendChild(item);
             });
         }
 
         calendarioSemana.appendChild(coluna);
     }
-
-    // Prioridades da semana exibida
-    const contagem = contarPrioridades(tarefasDaSemana);
-
-    atualizarElemento(quantidadeUrgente, contagem.urgente, "tarefa", "tarefas");
-    atualizarElemento(quantidadeImportante, contagem.importante, "tarefa", "tarefas");
-    atualizarElemento(quantidadeNormal, contagem.normal, "tarefa", "tarefas");
-
-    // Destaque: dia mais produtivo
-    const destaque = document.getElementById("destaque-produtiva");
-
-    if (destaque) {
-
-        destaque.textContent = maisProdutiva.dia
-            ? `${nomesCompletos[maisProdutiva.dia.getDay()]} • ` +
-              `${maisProdutiva.total} ${maisProdutiva.total === 1 ? "tarefa" : "tarefas"}`
-            : "Sem tarefas na semana";
-    }
 }
 
 
 /* MÊS */
-
-function criarDiaForaDoMes(numero) {
-
-    // Dia do mês anterior/seguinte: aparece cinza, sem tarefas e sem clique
-    const elemento = document.createElement("div");
-    const numeroDia = document.createElement("span");
-
-    elemento.className = "vazio";
-
-    numeroDia.className = "numero-dia";
-    numeroDia.textContent = numero;
-
-    elemento.appendChild(numeroDia);
-
-    return elemento;
-}
 
 function mostrarMes() {
 
@@ -787,24 +426,14 @@ function mostrarMes() {
     const quantidadeDias =
         new Date(ano, mes + 1, 0).getDate();
 
-    const diasMesAnterior =
-        new Date(ano, mes, 0).getDate();
-
-    // Completa a última semana com dias do mês seguinte
-    const totalCelulas =
-        Math.ceil((primeiroDia + quantidadeDias) / 7) * 7;
-
-    const diasRestantes =
-        totalCelulas - primeiroDia - quantidadeDias;
-
-    // Dias do mês anterior (ex.: 30, 31)
     for (let i = 0; i < primeiroDia; i++) {
 
-        diasCalendario.appendChild(
-            criarDiaForaDoMes(
-                diasMesAnterior - primeiroDia + 1 + i
-            )
-        );
+        const vazio =
+            document.createElement("div");
+
+        vazio.className = "vazio";
+
+        diasCalendario.appendChild(vazio);
     }
 
     for (let dia = 1; dia <= quantidadeDias; dia++) {
@@ -860,20 +489,9 @@ function mostrarMes() {
 
                 item.className = `mini-tarefa ${prioridade}`;
 
-                // Mostra o título completo ao passar o mouse
-                item.title = tarefa.titulo || "";
-
-                // Título + horário embaixo (igual ao layout)
                 item.innerHTML = `
                     <i></i>
-                    <div class="mini-texto">
-                        <span>${escaparHTML(tarefa.titulo)}</span>
-                        ${
-                            tarefa.horario
-                                ? `<small>${escaparHTML(tarefa.horario)}</small>`
-                                : ""
-                        }
-                    </div>
+                    <span>${escaparHTML(tarefa.titulo)}</span>
                 `;
 
                 listaMini.appendChild(item);
@@ -904,14 +522,6 @@ function mostrarMes() {
         diasCalendario.appendChild(elemento);
     }
 
-    // Dias do mês seguinte (ex.: 1, 2, 3)
-    for (let dia = 1; dia <= diasRestantes; dia++) {
-
-        diasCalendario.appendChild(
-            criarDiaForaDoMes(dia)
-        );
-    }
-
     atualizarPrioridadesMes();
 }
 
@@ -930,10 +540,8 @@ function configurarBotoesMes() {
 
         anterior.addEventListener("click", function () {
 
-            dataMesAtual = new Date(
-                dataMesAtual.getFullYear(),
-                dataMesAtual.getMonth() - 1,
-                1
+            dataMesAtual.setMonth(
+                dataMesAtual.getMonth() - 1
             );
 
             mostrarMes();
@@ -944,10 +552,8 @@ function configurarBotoesMes() {
 
         proximo.addEventListener("click", function () {
 
-            dataMesAtual = new Date(
-                dataMesAtual.getFullYear(),
-                dataMesAtual.getMonth() + 1,
-                1
+            dataMesAtual.setMonth(
+                dataMesAtual.getMonth() + 1
             );
 
             mostrarMes();
@@ -960,7 +566,30 @@ function configurarBotoesMes() {
 
 function atualizarPrioridades() {
 
-    // A contagem da semana é feita em mostrarSemana()
+    const contagem =
+        contarPrioridades(tarefas);
+
+    atualizarElemento(
+        quantidadeUrgente,
+        contagem.urgente,
+        "tarefa",
+        "tarefas"
+    );
+
+    atualizarElemento(
+        quantidadeImportante,
+        contagem.importante,
+        "tarefa",
+        "tarefas"
+    );
+
+    atualizarElemento(
+        quantidadeNormal,
+        contagem.normal,
+        "item",
+        "itens"
+    );
+
     atualizarPrioridadesMes();
 }
 
@@ -1072,6 +701,233 @@ function atualizarElemento(
 }
 
 
+/* PANORAMA FINANCEIRO (DADOS REAIS) */
+
+function formatarMoeda(valor) {
+
+    return (valor || 0).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL"
+    });
+}
+
+async function carregarResumoFinanceiro() {
+
+    const elementoStatus = document.querySelector(".status-financeiro");
+    const elementoPorcentagem = document.querySelector(".cartao-financeiro .porcentagem strong");
+    const elementoBarra = document.querySelector(".cartao-financeiro .progresso > div");
+    const elementoMensagem = document.querySelector(".mensagem-financeira");
+
+    try {
+
+        const resposta = await fetch("/api/lancamentos");
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao carregar lançamentos.");
+        }
+
+        const dados = await resposta.json();
+
+        const lancamentos = Array.isArray(dados)
+            ? dados
+            : dados.lancamentos || [];
+
+        const hoje = new Date();
+        const anoMesAtual = hoje.getFullYear() + "-" + String(hoje.getMonth() + 1).padStart(2, "0");
+
+        let entradasMes = 0;
+        let saidasMes = 0;
+
+        lancamentos.forEach(function (lancamento) {
+
+            if (!lancamento.data || !lancamento.data.startsWith(anoMesAtual)) {
+                return;
+            }
+
+            const valor = Number(lancamento.valor) || 0;
+
+            if (lancamento.tipo === "entrada") {
+                entradasMes += valor;
+            } else {
+                saidasMes += valor;
+            }
+        });
+
+        if (entradasMes === 0 && saidasMes === 0) {
+
+            if (elementoStatus) {
+                elementoStatus.textContent = "— nenhum lançamento este mês";
+                elementoStatus.style.color = "var(--cor-suave)";
+            }
+
+            if (elementoPorcentagem) elementoPorcentagem.textContent = "0%";
+            if (elementoBarra) elementoBarra.style.width = "0%";
+
+            if (elementoMensagem) {
+                elementoMensagem.textContent = "Registre seus lançamentos em Meu Dinheiro pra ver seu panorama aqui.";
+            }
+
+            return;
+        }
+
+        let percentual;
+
+        if (entradasMes > 0) {
+            percentual = Math.round((saidasMes / entradasMes) * 100);
+        } else {
+            percentual = 100;
+        }
+
+        const percentualExibido = Math.min(percentual, 100);
+
+        if (elementoPorcentagem) {
+            elementoPorcentagem.textContent = percentual + "%";
+        }
+
+        if (elementoBarra) {
+            elementoBarra.style.width = percentualExibido + "%";
+        }
+
+        if (elementoStatus) {
+
+            if (percentual <= 50) {
+                elementoStatus.textContent = "↘ gastos sob controle";
+                elementoStatus.style.color = "var(--cor-verde)";
+            } else if (percentual <= 85) {
+                elementoStatus.textContent = "→ atenção aos gastos";
+                elementoStatus.style.color = "var(--cor-laranja)";
+            } else {
+                elementoStatus.textContent = "↗ gastos acima do recebido";
+                elementoStatus.style.color = "var(--cor-vermelho)";
+            }
+        }
+
+        if (elementoMensagem) {
+
+            elementoMensagem.textContent =
+                `Este mês: ${formatarMoeda(entradasMes)} de entradas e ${formatarMoeda(saidasMes)} de saídas.`;
+        }
+
+    } catch (erro) {
+
+        console.error("Erro ao carregar resumo financeiro:", erro);
+
+        if (elementoStatus) {
+            elementoStatus.textContent = "Não foi possível carregar.";
+            elementoStatus.style.color = "var(--cor-vermelho)";
+        }
+
+        if (elementoMensagem) {
+            elementoMensagem.textContent = "Não foi possível carregar seus lançamentos agora.";
+        }
+    }
+}
+
+
+/* METAS EM MOVIMENTO (DADOS REAIS) */
+
+function obterVisualMeta(categoria) {
+
+    const chave = (categoria || "").toLowerCase();
+
+    if (chave === "saude") {
+        return { icone: "i-heart", classeIcone: "rosa", classeBarra: "verde" };
+    }
+
+    if (chave === "financeiro" || chave === "dinheiro") {
+        return { icone: "i-money", classeIcone: "", classeBarra: "verde" };
+    }
+
+    if (chave === "estudos" || chave === "enem") {
+        return { icone: "i-enem", classeIcone: "", classeBarra: "azul" };
+    }
+
+    return { icone: "i-target", classeIcone: "", classeBarra: "azul" };
+}
+
+function criarLinhaMeta(meta) {
+
+    const percentual = meta.valorMeta > 0
+        ? Math.min(100, Math.round((meta.valorAtual / meta.valorMeta) * 100))
+        : 0;
+
+    const visual = obterVisualMeta(meta.categoria);
+
+    const elemento = document.createElement("div");
+    elemento.className = "meta";
+
+    elemento.innerHTML = `
+        <div class="icone-meta ${visual.classeIcone}">
+            <svg class="ic"><use href="#${visual.icone}"/></svg>
+        </div>
+        <div class="corpo-meta">
+            <div class="cabecalho-meta">
+                <span>${escaparHTML(meta.nome)}</span>
+                <strong>${percentual}%</strong>
+            </div>
+            <div class="progresso-meta"><div class="${visual.classeBarra}" style="width:${percentual}%"></div></div>
+        </div>
+    `;
+
+    return elemento;
+}
+
+async function carregarResumoMetas() {
+
+    const container = document.getElementById("lista-metas-painel");
+
+    if (!container) return;
+
+    try {
+
+        const resposta = await fetch("/api/metas");
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao carregar metas.");
+        }
+
+        const dados = await resposta.json();
+
+        const metas = Array.isArray(dados)
+            ? dados
+            : dados.metas || [];
+
+        if (metas.length === 0) {
+
+            container.innerHTML = `<p class="sem-tarefas">Você ainda não criou nenhuma meta.</p>`;
+            return;
+        }
+
+        // Prioriza as metas ainda não concluídas, da mais avançada pra menos avançada
+        const emAndamento = metas
+            .filter(function (meta) {
+                return !meta.concluida;
+            })
+            .sort(function (a, b) {
+
+                const percentualA = a.valorMeta > 0 ? a.valorAtual / a.valorMeta : 0;
+                const percentualB = b.valorMeta > 0 ? b.valorAtual / b.valorMeta : 0;
+
+                return percentualB - percentualA;
+            });
+
+        const destaque = (emAndamento.length > 0 ? emAndamento : metas).slice(0, 2);
+
+        container.innerHTML = "";
+
+        destaque.forEach(function (meta) {
+            container.appendChild(criarLinhaMeta(meta));
+        });
+
+    } catch (erro) {
+
+        console.error("Erro ao carregar metas:", erro);
+
+        container.innerHTML = `<p class="sem-tarefas">Não foi possível carregar suas metas.</p>`;
+    }
+}
+
+
 /* LINKS */
 
 function configurarLinks() {
@@ -1128,7 +984,6 @@ function formatarCategoria(categoria) {
 
     const categorias = {
         estudos: "Estudos",
-        saude: "Saúde",
         pessoal: "Pessoal",
         trabalho: "Trabalho",
         outros: "Outros"
@@ -1363,7 +1218,7 @@ function renderizarListaModalDia() {
 
 async function excluirTarefaModal(id) {
 
-    const confirmar = mostrarAviso("Deseja excluir esta tarefa?");
+    const confirmar = confirm("Deseja excluir esta tarefa?");
 
     if (!confirmar) {
         return;
@@ -1428,12 +1283,12 @@ async function salvarEdicaoTarefa(evento) {
     const prioridade = document.getElementById("editar-prioridade").value;
 
     if (!titulo || titulo.length < 3) {
-        mostrarAviso("Digite um nome com pelo menos 3 caracteres.");
+        alert("Digite um nome com pelo menos 3 caracteres.");
         return;
     }
 
     if (!data) {
-        mostrarAviso("Escolha uma data para a tarefa.");
+        alert("Escolha uma data para a tarefa.");
         return;
     }
 
@@ -1460,7 +1315,7 @@ async function salvarEdicaoTarefa(evento) {
         const dados = await resposta.json();
 
         if (!dados.sucesso) {
-            mostrarAviso(dados.mensagem || "Não foi possível salvar as alterações.");
+            alert(dados.mensagem || "Não foi possível salvar as alterações.");
             return;
         }
 
@@ -1477,11 +1332,10 @@ async function salvarEdicaoTarefa(evento) {
     } catch (erro) {
 
         console.error(erro);
-        mostrarAviso("Não foi possível conectar ao servidor. Verifique se o Node.js está funcionando.");
+        alert("Não foi possível conectar ao servidor. Verifique se o Node.js está funcionando.");
 
     } finally {
 
         botaoSalvar.disabled = false;
     }
 }
-

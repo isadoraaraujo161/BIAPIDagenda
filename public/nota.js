@@ -12,7 +12,7 @@ let chaveArmazenamento = "notasBipaid";
 const CORES = {
     azul:    { categoria: "Estudos",  tarefa: "estudos"  },
     roxo:    { categoria: "Trabalho", tarefa: "trabalho" },
-    rosa:    { categoria: "Alimentção",    tarefa: "outros"   },
+    rosa:    { categoria: "Alimentação",    tarefa: "outros"   },
     verde:   { categoria: "Finanças", tarefa: "outros"   },
     amarelo: { categoria: "Pessoal",  tarefa: "pessoal"  }
 };
