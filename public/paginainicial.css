@@ -1115,6 +1115,48 @@ a {
 .botao-menu-mobile .ic {
     color: var(--cor-acento);
 }
+@media (max-width: 760px) {
+    .caminho-pagina {
+        cursor: pointer;
+    }
+}
+
+.botao-hamburguer {
+    display: none;
+}
+
+@media (max-width: 760px) {
+
+    .botao-hamburguer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border: 1px solid var(--cor-borda);
+        border-radius: 10px;
+        background: var(--cor-superficie);
+        color: var(--cor-acento);
+        font-size: 22px;
+        cursor: pointer;
+    }
+}
+
+.botao-menu-mobile {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: default; /* no desktop não é clicável */
+}
+
+.botao-menu-mobile .ic {
+    color: var(--cor-acento);
+}
 
 @media (max-width: 760px) {
 
