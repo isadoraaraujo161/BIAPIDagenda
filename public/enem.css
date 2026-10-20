@@ -379,7 +379,7 @@ button {
     gap: 14px;
 }
 
-.botao-notificacao {
+.notificacao {
     width: 39.8px;
     height: 39.8px;
     border: 1px solid var(--cor-borda);
@@ -393,12 +393,12 @@ button {
     transition: background .2s, border-color .2s, color .2s;
 }
 
-.botao-notificacao:hover {
+.notificacao:hover {
     background: var(--cor-fundo);
     color: var(--cor-texto-forte);
 }
 
-.botao-notificacao .ic {
+.notificacao .ic {
     width: 18px;
     height: 18px;
 }
