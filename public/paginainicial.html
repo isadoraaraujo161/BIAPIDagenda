@@ -44,7 +44,8 @@
     <!-- Aplicativo -->
     <div class="aplicativo">
 
-        <aside class="barra-lateral" id="barraLateral">
+        <aside class="barra-lateral">
+
             <div class="area-logo">
                 <div class="simbolo-logo">B</div>
                 <div>
@@ -127,8 +128,6 @@
 
         </aside>
 
-        <div class="fundo-menu" id="fundoMenu"></div>
-
         <!-- Conteúdo principal -->
         <main class="conteudo-principal">
 
@@ -136,12 +135,16 @@
             <header class="barra-superior">
 
                 <div class="caminho-pagina">
-                    <svg class="ic"><use href="#i-home"/></svg>
-                    <strong>BIPAID</strong>
-                    <em>›</em>
-                    <span>Início</span>
-                </div>
+                <button type="button" class="botao-menu-mobile" id="botaoHamburguer"
+                 aria-label="Abrir menu" aria-controls="barraLateral" aria-expanded="false">
+                  <svg class="ic"><use href="#i-home"/></svg>
+                  <strong>BIPAID</strong>
+                  </button>
+                  <em>›</em>
+                  <span>Início</span>
+                  </div>
 
+                  
                 <div class="acoes-superiores">
 
                     <button type="button" class="notificacao" title="Notificações">
@@ -149,8 +152,7 @@
                     </button>
 
                     <!-- PERFIL SUPERIOR: DIRECIONA PARA perfil.html -->
-                    <a href="perfil.html" class="botao-perfil" id="botaoMenu"
-                     aria-controls="barraLateral" aria-expanded="false"
+                    <a href="perfil.html" class="botao-perfil"
                        style="text-decoration: none; color: inherit;">
 
                         <span>♙</span>
@@ -370,8 +372,7 @@
         </main>
 
     </div>
-    
-    <script src="menu-mobile.js"></script>
+
     <script src="usuario.js"></script>
      <script>
     mostrarUsuario();
