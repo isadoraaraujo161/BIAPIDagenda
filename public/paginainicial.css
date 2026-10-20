@@ -1082,6 +1082,39 @@ a {
     }
 }
 
+@media (max-width: 760px) {
+
+    .barra-superior {
+        padding: 0 12px;
+    }
+
+    .cartoes-resumo {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .banner-boas-vindas h1 {
+        font-size: 24px;
+    }
+
+    .categoria-tarefa {
+        display: none;
+    }
+}
+.botao-menu-mobile {
+    display: flex;
+    align-items: center;
+    gap: 10.5px;
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: default; /* no desktop não é clicável */
+}
+
+.botao-menu-mobile .ic {
+    color: var(--cor-acento);
+}
 
 @media (max-width: 760px) {
 
