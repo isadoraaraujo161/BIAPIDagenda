@@ -10,8 +10,8 @@ const EVENTOS = [
     {
         id: "evento-projetos-ept",
         titulo: "Projetos de tecnologia, empreendedorismo e educação profissional",
-        dia: 18,
-        mes: 8,
+        dia: 26,
+        mes: 10,
         horario: "14:00",
         local: "Auditório Central",
         publico: "Estudantes e educadores",
@@ -20,8 +20,8 @@ const EVENTOS = [
     {
         id: "evento-pensamento-computacional",
         titulo: "Pensamento computacional e uso responsável de tecnologia",
-        dia: 24,
-        mes: 8,
+        dia: 23,
+        mes: 10,
         horario: "09:00",
         local: "Laboratório Maker",
         publico: "Iniciantes em tecnologia",
